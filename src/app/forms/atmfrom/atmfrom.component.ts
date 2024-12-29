@@ -14,6 +14,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { CardNoMaskPipe, PassMaskPipe } from '../../core/pipes/masking.pipe';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-atmfrom',
@@ -28,9 +30,12 @@ import { CardNoMaskPipe, PassMaskPipe } from '../../core/pipes/masking.pipe';
     PassMaskPipe,
     CardNoMaskPipe,
     ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
   ],
   templateUrl: './atmfrom.component.html',
   styleUrls: ['./atmfrom.component.css'],
+
 })
 export class AtmfromComponent implements OnInit {
   title: string = 'Add Card Details';
@@ -59,7 +64,7 @@ export class AtmfromComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public dialogData: any
   ) {
     this.form = this.fb.group({
       cardno: ['', Validators.required],
@@ -83,16 +88,16 @@ export class AtmfromComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.data.type === 'View') {
+    if (this.dialogData.type === 'View') {
       this.title = 'View Card Details';
       this.form = this.fb.group({
-        cardno: [this.data.cno],
-        name: [this.data.cname, Validators.required],
+        cardno: [this.dialogData.cno],
+        name: [this.dialogData.cname, Validators.required],
         exp_month: [
-          new Date(this.data.exp).getMonth().toString().padStart(2, '0'),
+          new Date(this.dialogData.exp).getMonth().toString().padStart(2, '0'),
         ],
-        exp_year: [new Date(this.data.exp).getFullYear()],
-        cvv: [this.data.cvv, Validators.required],
+        exp_year: [new Date(this.dialogData.exp).getFullYear()],
+        cvv: [this.dialogData.cvv, Validators.required],
       });
     }
   }
@@ -132,4 +137,5 @@ export class AtmfromComponent implements OnInit {
   toggleClick(index: number): void {
     this.clickedIcons[index] = !this.clickedIcons[index];
   }
+
 }
