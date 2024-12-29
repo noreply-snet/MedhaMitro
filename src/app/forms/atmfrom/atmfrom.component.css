@@ -1,0 +1,113 @@
+.main {
+    width: 100%;
+}
+
+.header::before {
+    content: none;
+}
+
+.header {
+    margin-top: 20px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.header>button>mat-icon {
+    transform: rotateZ(45deg);
+}
+
+.form {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.exp_date>mat-form-field {
+    width: 250px !important;
+}
+
+.exp_date {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+/* ____________________________________________________________ */
+/* Style of View ATM */
+
+
+.container>mat-dialog-content {
+    padding-top: 15px;
+}
+
+.container>mat-dialog-content>.action {
+    margin-bottom: 20px;
+}
+
+.action> :first-child{
+    margin-right: 1.5rem;
+}
+
+.cont {
+    display: flex;
+
+}
+
+.cont-data{
+    display: flex;
+}
+
+.cf.ss {
+    margin-bottom: 75px;
+}
+
+.cf>h3 {
+    margin-right: 1.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 1.1rem;
+}
+
+.ic2{
+    margin-bottom: 1.1rem;
+}
+
+.cl2>form {
+    margin: 0px;
+    padding: 8px;
+}
+
+.cd  {
+    margin-bottom: 1.1rem;
+}
+
+.cd>mat-icon {
+    margin-right: 1.2rem;
+    cursor: pointer;
+}
+
+.cd>span {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.cd3>.exp_date> :first-child {
+    margin-right: 1.2rem;
+}
+
+.item>mat-form-field {
+    width: 250px;
+}
+
+.clicked {
+    color: rgb(207, 177, 43);
+}
+
+.copied{
+    background-color: #673ab7;
+}

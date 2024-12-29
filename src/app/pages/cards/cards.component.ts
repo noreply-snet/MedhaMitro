@@ -1,15 +1,36 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChildren, OnInit } from '@angular/core';
 import { AtmData } from '../../core/interface/interfaces.share';
+import { MatDialog } from '@angular/material/dialog';
+import { DatashareService } from '../../core/services/datashare.service';
+import { AtminfoComponent } from '../../shared/atminfo/atminfo.component';
+import { Subscription } from 'rxjs';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { CardPipe } from '../../core/pipes/card.pipe';
+import { CardNoMaskPipe, MaskingPipe } from '../../core/pipes/masking.pipe';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @Component({
   selector: 'app-cards',
-  imports: [],
+  imports: [
+    CommonModule,
+    ClipboardModule,
+    MatIconModule,
+    CardPipe,
+    CardNoMaskPipe,
+    MaskingPipe,
+    MatButtonModule,
+    MatTooltipModule,
+  ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.css'
 })
-export class CardsComponent {
-
-  dataSheet: AtmData[] =[{
+export class CardsComponent implements AfterViewInit  {
+  
+  dataGet: AtmData[] =[{
     "id": 1,
     "cardNumber": 4892322376815462,
     "name": "Jarad Pitman",
@@ -131,4 +152,106 @@ export class CardsComponent {
     "cvv": 616
   }];
 
+  @ViewChildren('frontCard', { read: ElementRef }) frontCards!: QueryList<ElementRef>;
+  @ViewChildren('backCard', { read: ElementRef }) backCards!: QueryList<ElementRef>;
+  @ViewChildren('Icons', { read: ElementRef }) matIcons!: QueryList<ElementRef>;
+
+  filter: string = '';
+  ddf: Subscription | undefined;
+
+  constructor(private dialog: MatDialog) {}
+
+  ngAfterViewInit(): void {
+    // Optional: Log the DOM elements for debugging
+    console.log('Front Cards:', this.frontCards);
+    console.log('Back Cards:', this.backCards);
+  }
+
+  onEnter(num: number) {
+    const frontCard = this.frontCards.toArray()[num];
+    const backCard = this.backCards.toArray()[num];
+
+    if (frontCard && backCard) {
+      frontCard.nativeElement.classList.toggle('active');
+      backCard.nativeElement.classList.toggle('active');
+    } else {
+      console.error(`Front or Back card element not found for index ${num}`);
+    }
+  }
+
+  onLeave(num: number) {
+    const frontCard = this.frontCards.toArray()[num];
+    const backCard = this.backCards.toArray()[num];
+
+    if (frontCard && backCard) {
+      frontCard.nativeElement.classList.remove('active');
+      backCard.nativeElement.classList.remove('active');
+    } else {
+      console.error(`Front or Back card element not found for index ${num}`);
+    }
+  }
+
+  onShow(num: number) {
+    const icons = this.matIcons.toArray().filter((icon) => {
+      const element = icon.nativeElement as HTMLElement;
+      return element.classList.contains(`mat${num}`);
+    });
+
+    if (icons.length === 0) {
+      console.warn(`No icons found with class mat${num}`);
+    }
+
+    icons.forEach((icon) => {
+      const element = icon.nativeElement as HTMLElement;
+      element.style.opacity = '1';
+    });
+  }
+
+  onHide(num: number) {
+    const icons = this.matIcons.toArray().filter((icon) => {
+      const element = icon.nativeElement as HTMLElement;
+      return element.classList.contains(`mat${num}`);
+    });
+
+    if (icons.length === 0) {
+      console.warn(`No icons found with class mat${num}`);
+    }
+
+    icons.forEach((icon) => {
+      const element = icon.nativeElement as HTMLElement;
+      element.style.opacity = '0';
+    });
+  }
+
+  openFromDialog(): void {
+    this.dialog.open(AtminfoComponent, {
+      width: '50%',
+      data: { type: 'Form' },
+    });
+  }
+
+
+  openViewDialog(
+    cardNo: number,
+    name: string,
+    expDate: string,
+    cvv: number
+  ): void {
+    this.dialog.open(AtminfoComponent, {
+      width: '45%',
+      data: { type: 'View', cno: cardNo, cname: name, exp: expDate, cvv: cvv },
+    });
+  }
+
+  // ngOnInit(): void {
+  //   this.ddf = this.dataShare.data$.subscribe((data) => {
+  //     this.filter = data;
+  //   });
+  // }
+
+  // ngOnDestroy(): void {
+  //   this.ddf.unsubscribe();
+  // }
+
 }
+
