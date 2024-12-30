@@ -9,28 +9,20 @@ import { AtmData } from '../../core/interface/interfaces.share';
 import { MatDialog } from '@angular/material/dialog';
 import { DatashareService } from '../../core/services/datashare.service';
 import { Subscription } from 'rxjs';
-import { ClipboardModule } from '@angular/cdk/clipboard';
-import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
 import { CardPipe } from '../../core/pipes/card.pipe';
-import { CardNoMaskPipe, MaskingPipe } from '../../core/pipes/masking.pipe';
-import { MatButtonModule } from '@angular/material/button';
+import { MaskingPipe } from '../../core/pipes/masking.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AtmfromComponent } from '../../forms/atmfrom/atmfrom.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonImportsModule } from '../../core/modules/common-imports.module';
 
 @Component({
   selector: 'app-cards',
   imports: [
-    CommonModule,
-    ClipboardModule,
-    MatIconModule,
+    CommonImportsModule,
     CardPipe,
-    CardNoMaskPipe,
     MaskingPipe,
-    MatButtonModule,
     MatTooltipModule,
-    MatFormFieldModule,
+    
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.css',

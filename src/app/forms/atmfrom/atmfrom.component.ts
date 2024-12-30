@@ -7,31 +7,23 @@ import {
 } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { CommonModule } from '@angular/common';
-import { CardNoMaskPipe, PassMaskPipe } from '../../core/pipes/masking.pipe';
-import { MatButtonModule } from '@angular/material/button';
+import { PassMaskPipe } from '../../core/pipes/masking.pipe';
 import { MatInputModule } from '@angular/material/input';
+import { CommonImportsModule } from '../../core/modules/common-imports.module';
 
 @Component({
   selector: 'app-atmfrom',
   imports: [
-    CommonModule,
+    CommonImportsModule,
     MatDialogModule,
-    MatIconModule,
-    ClipboardModule,
     MatDividerModule,
-    MatFormFieldModule,
     MatSelectModule,
     PassMaskPipe,
-    CardNoMaskPipe,
     ReactiveFormsModule,
-    MatButtonModule,
     MatInputModule,
+    
   ],
   templateUrl: './atmfrom.component.html',
   styleUrls: ['./atmfrom.component.css'],
