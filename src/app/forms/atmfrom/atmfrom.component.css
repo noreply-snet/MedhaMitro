@@ -12,9 +12,13 @@
     align-items: baseline;
     justify-content: space-between;
 }
+.header>button{
+    background-color: #fa4f4f;
+}
 
 .header>button>mat-icon {
     transform: rotateZ(45deg);
+
 }
 
 .form {
@@ -36,6 +40,15 @@ mat-form-field {
     display: flex;
     align-items: flex-start;
     justify-content: space-around;
+}
+
+.exp_date>mat-label {
+    width: 100px;
+    height: 40px;
+    align-self: center;
+}
+.exp_date>mat-form-field{
+    margin: 0 0 0 35px;
 }
 
 /* ____________________________________________________________ */
@@ -73,6 +86,9 @@ mat-form-field {
     text-align: start;
 }
 
+.sd {
+    min-width: 250px;
+}
 .cd>span, .cf {
     font-weight: bold;
     font-size: 1.2rem;

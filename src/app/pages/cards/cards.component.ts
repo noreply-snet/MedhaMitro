@@ -270,6 +270,7 @@ export class CardsComponent implements AfterViewInit {
     this.dialog.open(AtmfromComponent, {
       width: '45%',
       data: { type: 'View', cno: cardNo, cname: name, exp: expDate, cvv: cvv },
+      disableClose : true,
     });
   }
 

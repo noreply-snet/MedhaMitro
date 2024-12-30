@@ -105,7 +105,7 @@
     <div class="main">
         <div mat-dialog-title class="header">
             <h2>{{title}}</h2>
-            <button [mat-dialog-close]="true" mat-mini-fab color="primary" aria-label="dialog close button">
+            <button [mat-dialog-close]="true" style="background-color: red;" mat-mini-fab color="primary" aria-label="dialog close button">
                 <mat-icon>add</mat-icon>
             </button>
         </div>
@@ -123,8 +123,8 @@
                     <input matInput name="name" formControlName="name">
                 </mat-form-field>
 
-                <mat-label>Exp Date</mat-label>
                 <div class="exp_date">
+                    <mat-label>Exp Date:</mat-label>
                     <mat-form-field appearance="outline">
                         <mat-label for="exp_month">Month</mat-label>
                         <mat-select formControlName="exp_month" name="exp_month">
