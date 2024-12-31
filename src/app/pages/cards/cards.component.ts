@@ -14,10 +14,12 @@ import { MaskingPipe } from '../../core/pipes/masking.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AtmfromComponent } from '../../forms/atmfrom/atmfrom.component';
 import { CommonImportsModule } from '../../core/modules/common-imports.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cards',
   imports: [
+    CommonModule,
     CommonImportsModule,
     CardPipe,
     MaskingPipe,

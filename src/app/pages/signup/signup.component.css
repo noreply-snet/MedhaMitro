@@ -1,0 +1,84 @@
+.main {
+    text-align: center;
+    margin-top: 5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.co-main {
+    width: 40%;
+    min-width: 500px;
+    box-shadow: 0 0 10px rgba(196, 89, 229, 0.672);
+    border-radius: 20px;
+    padding-bottom: 20px;
+}
+
+.m-cont {
+    min-width: 400px;
+    width: 100%;
+}
+
+.m-logo {
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    background-color: #673ab7;
+}
+
+.login {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.l-text {
+    font-size: 1.8rem;
+    color: white;
+}
+
+.s-text {
+    color: white;
+}
+
+.signup {
+    margin-left: 5px;
+    font-family: monospace;
+    color: #f3d051;
+}
+
+.signup:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.m-body {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.m-body>mat-form-field {
+    width: 70%;
+}
+
+.m-body>button {
+    margin-top: 20px;
+}
+
+.forgotp {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.forgotp:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: rgb(244, 59, 38);
+}

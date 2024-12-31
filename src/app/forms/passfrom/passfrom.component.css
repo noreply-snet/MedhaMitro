@@ -1,23 +1,22 @@
-.main {
+
+.main{
     width: 100%;
 }
-
-.header::before {
+.header::before{
     content: none;
 }
-
-.header {
+.header{
     margin-top: 20px;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
 }
 
-.header>button>mat-icon {
+.header > button > mat-icon{
     transform: rotateZ(45deg);
 }
 
-.form {
+.form{
     /* width: 100%; */
     display: flex;
     align-items: center;
@@ -25,7 +24,7 @@
     padding-top: 20px;
 }
 
-mat-form-field {
+mat-form-field{
     width: 100%;
 }
 
@@ -59,9 +58,6 @@ mat-form-field {
     margin-bottom: 1.1rem;
 }
 
-
-
-
 .icon {
     cursor: pointer;
 }
@@ -70,10 +66,10 @@ mat-form-field {
     margin-bottom: 1.1rem;
 }
 
-.ic3>mat-icon, .ic6>mat-icon {
+.ic4>mat-icon{
     margin-bottom: 0px;
 }
-.ic4,.ic7{
+.ic5{
     display: flex;
     align-items: baseline;
 }
@@ -94,14 +90,6 @@ mat-form-field {
 }
 
 
-
-.cd6{
-    margin-bottom: 12px;
-}
-
-.cd7{
-    margin-bottom: 1.1rem;
-}
 
 
 .clicked {

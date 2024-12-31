@@ -1,1 +1,138 @@
-<p>tableview works!</p>
+<div class="main">
+    <div class="container">
+        <div class="table">
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                        <tr>
+                            <ng-container>
+                                <th (mouseenter)="mousein('icon-1')" (mouseleave)="mouseout('icon-1')"
+                                    (click)="onClick('icon-1');fild='id';type='Num';">
+                                    <div class="sort">
+                                        <span>SL No</span>
+                                        <mat-icon id="icon-1" area-sort="none">arrow_upward</mat-icon>
+                                    </div>
+                                </th>
+
+                                <th (mouseenter)="mousein('icon-3')" (mouseleave)="mouseout('icon-3')"
+                                    (click)="onClick('icon-3');fild='name';type='Str';">
+                                    <div class="sort">
+                                        <span>Name</span>
+                                        <mat-icon id="icon-3" area-sort="none">arrow_upward</mat-icon>
+                                    </div>
+                                </th>
+
+                                <th (mouseenter)="mousein('icon-4')" (mouseleave)="mouseout('icon-4')"
+                                    (click)="onClick('icon-4');fild='username';type='Str';">
+                                    <div class="sort">
+                                        <span>User Name</span>
+                                        <mat-icon id="icon-4" area-sort="none">arrow_upward</mat-icon>
+                                    </div>
+                                </th>
+
+                                <th (mouseenter)="mousein('icon-5')" (mouseleave)="mouseout('icon-5')"
+                                    (click)="onClick('icon-5');fild='dob';type='Date';">
+                                    <div class="sort">
+                                        <span>URL</span>
+                                        <mat-icon id="icon-5" area-sort="none">arrow_upward</mat-icon>
+                                    </div>
+                                </th>
+
+                                <th (mouseenter)="mousein('icon-6')" (mouseleave)="mouseout('icon-6')"
+                                    (click)="onClick('icon-6');fild='last_seen';type='Date';">
+                                    <div class="sort">
+                                        <span>Last Seen</span>
+                                        <mat-icon id="icon-6" area-sort="none">arrow_upward</mat-icon>
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="sort">
+                                        <span>Action</span>
+                                    </div>
+                                </th>
+                            </ng-container>
+
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        <tr
+                            *ngFor!="let user of dataSheet|mslice:currentPage:item_per_page|passpipe:filter|mshort:fild:type:order; ">
+                            <td class="td1">
+                                <span>{{user.id}}</span>
+                            </td>
+                            <td class="td2">
+                                <span>{{user.name}}</span>
+                            </td>
+                            <td class="td3">
+                                <span>{{user.username}}</span>
+                            </td>
+                            <td class="td4">
+                                <span>{{user.url}}</span>
+                            </td>
+                            <td class="td5">
+                                <span>{{user.last_seen}}</span>
+                            </td>
+                            <td id="action-btn">
+                                <button class="act_btn" mat-raised-button (click)="openViewDialog(user.id,user.name,user.url,user.username,user.loginid,user.password,user.notes)"
+                                    color="primary">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="page-nav">
+            <div class="select">
+                <p>Item per page</p>
+                <mat-form-field appearance="fill">
+                    <mat-select (selectionChange)="currentPage = 1;lastpage();fild = 'id';type = 'Num';
+                    order = true;attrClear()" [(value)]='selected'>
+                        <mat-option value=10>10</mat-option>
+                        <mat-option value=30>30</mat-option>
+                        <mat-option value=100>100</mat-option>
+                        <mat-option value=200>200</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="page-nav-center">
+                <div class="page-cc">
+                    <button mat-raised-button matTooltip="First Page" (click)="currentPage = 1;" [disabled]="currentPage==1" color="primary">
+                        <mat-icon>first_page</mat-icon>
+                    </button>
+
+                    <button mat-raised-button (click)="currentPage= currentPage - 1;lastpage()"
+                        [disabled]="currentPage==1" color="primary">
+                        <mat-icon>chevron_left</mat-icon>
+                    </button>
+
+                    <span>Page {{currentPage}} out of {{ lastPage}}</span>
+
+                    <button mat-raised-button (click)="currentPage= currentPage + 1;lastpage()"
+                        [disabled]="currentPage== lastPage" color="primary">
+                        <mat-icon>chevron_right</mat-icon>
+                    </button>
+
+                    <button mat-raised-button matTooltip="Last Page" (click)="currentPage = lastPage;lastpage()"
+                        [disabled]="currentPage== lastPage" color="primary">
+                        <mat-icon>last_page</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="add-data">
+                <button mat-fab matTooltip="Add New" color="primary" (click)="openFormDialog()" aria-label=" openDialog button">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

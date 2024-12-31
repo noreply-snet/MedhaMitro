@@ -15,104 +15,77 @@
                 <mat-icon>add</mat-icon>
             </button>
         </div>
+
         <mat-dialog-content class="mat-typography">
             <div class="action">
                 <button mat-raised-button color="primary"
-                    (click)="edit_mode=true;title='Edit Bank Details';data.type='Form'">Edit</button>
+                    (click)="edit_mode=true;title='Edit Password';data.type='Form';hide=false;">Edit</button>
                 <button mat-raised-button color="accent" [ngClass]="{ 'copied': clickedIcons[0]}"
-                    (click)="clickedIcons[0]=!clickedIcons[0]"
-                    [cdkCopyToClipboard]="'Bank Name: '+data.bname+'\n'+'Account Type: '+ data.acc_typ+'\n'+'Holder Name: '+ data.name+'\n'+'Account Number: '+ data.acc_num+'\n'+'IFSC Code: '+data.ifsc"
+                    [cdkCopyToClipboard]="'Name: '+data.name+'\n'+'URL: '+data.url+'\n'+'Username: '+data.username+'\n'+'LogIn ID: '+data.loginid+'\n'+'Password: '+data.pass+'\n'+'Note: '+data.note"
                     aria-label="dialog content copy button">
                     Copy All
                 </button>
             </div>
 
             <div class="cont">
+
                 <div class="cont-fild">
                     <div class="cf cf1">
-                        <h3>Holder Name:</h3>
-                    </div>
-                    <div class="cf cf1a">
-                        <h3>Registered Mobile Number:</h3>
+                        <h3>Name:</h3>
                     </div>
                     <div class="cf cf2">
-                        <h3>Bank Name:</h3>
+                        <h3>URL:</h3>
                     </div>
                     <div class="cf cf3">
-                        <h3>Account Type:</h3>
+                        <h3>Username:</h3>
                     </div>
                     <div class="cf cf4">
-                        <h3>Account Number:</h3>
+                        <h3>LogIn ID:</h3>
                     </div>
                     <div class="cf cf5">
-                        <h3>Branch Name:</h3>
+                        <h3>Password:</h3>
                     </div>
                     <div class="cf cf6">
-                        <h3>IFSC Code:</h3>
-                    </div>
-                    <div class="cf cf7">
-                        <h3>MIRC Code:</h3>
-                    </div>
-                    <div class="cf cf8">
                         <h3>Note:</h3>
                     </div>
                 </div>
+
 
                 <div class="cont-data">
                     <div class="cl1">
                         <div class="icon ic1">
                             <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[1] }"
-                                (click)="clickedIcons[1]=!clickedIcons[1]" [cdkCopyToClipboard]="data.name"
-                                fontIcon="content_copy"></mat-icon>
-                        </div>
-                        <div class="icon ic1a">
-                            <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[9] }"
-                                (click)="clickedIcons[9]=!clickedIcons[9]" [cdkCopyToClipboard]="data.name"
+                                (click)="clickedIcons[1]=!clickedIcons[1]" [cdkCopyToClipboard]="data.tit"
                                 fontIcon="content_copy"></mat-icon>
                         </div>
                         <div class="icon ic2">
                             <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[2] }"
-                                (click)="clickedIcons[2]=!clickedIcons[2]" [cdkCopyToClipboard]="data.bank_name"
+                                (click)="clickedIcons[2]=!clickedIcons[2]" [cdkCopyToClipboard]="data.tit"
                                 fontIcon="content_copy"></mat-icon>
                         </div>
                         <div class="icon ic3">
                             <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[3] }"
-                                (click)="clickedIcons[3]=!clickedIcons[3]" [cdkCopyToClipboard]="data.acc_type"
+                                (click)="clickedIcons[3]=!clickedIcons[3]" [cdkCopyToClipboard]="data.tit"
                                 fontIcon="content_copy"></mat-icon>
                         </div>
                         <div class="icon ic4">
                             <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[4] }"
-                                (click)="clickedIcons[4]=!clickedIcons[4]" [cdkCopyToClipboard]="data.acc_number"
+                                (click)="clickedIcons[4]=!clickedIcons[4]" [cdkCopyToClipboard]="data.tit"
                                 fontIcon="content_copy"></mat-icon>
-
-                            <button mat-icon-button matSuffix (click)="status[0] = !status[0]"
-                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="status[0]">
-                                <mat-icon>{{status[0] ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
                         </div>
                         <div class="icon ic5">
                             <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[5] }"
-                                (click)="clickedIcons[5]=!clickedIcons[5]" [cdkCopyToClipboard]="data.branch_name"
+                                (click)="clickedIcons[5]=!clickedIcons[5]" [cdkCopyToClipboard]="data.tit"
                                 fontIcon="content_copy"></mat-icon>
+
+                            <button mat-icon-button matSuffix (click)="status = !status"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="status">
+                                <mat-icon>{{status ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
                         </div>
                         <div class="icon ic6">
                             <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[6] }"
-                                (click)="clickedIcons[6]=!clickedIcons[6]" [cdkCopyToClipboard]="data.ifsc_code"
-                                fontIcon="content_copy"></mat-icon>
-                        </div>
-                        <div class="icon ic7">
-                            <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[7] }"
-                                (click)="clickedIcons[7]=!clickedIcons[7]" [cdkCopyToClipboard]="data.mirc_code"
-                                fontIcon="content_copy"></mat-icon>
-
-                            <button mat-icon-button matSuffix (click)="status[1] = !status[1]"
-                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="status[1]">
-                                <mat-icon>{{status[1] ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
-                        </div>
-                        <div class="icon ic8">
-                            <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[8] }"
-                                (click)="clickedIcons[8]=!clickedIcons[8]" [cdkCopyToClipboard]="data.note"
+                                (click)="clickedIcons[6]=!clickedIcons[6]" [cdkCopyToClipboard]="data.tit"
                                 fontIcon="content_copy"></mat-icon>
                         </div>
                     </div>
@@ -122,45 +95,35 @@
                         <div class="cd cd1">
                             <span>{{data.name}}</span>
                         </div>
-                        <div class="cd cd1a">
-                            <span>{{data.rmn}}</span>
-                        </div>
                         <div class="cd cd2">
-                            <span>{{data.bname}}</span>
+                            <span>{{data.url}}</span>
                         </div>
                         <div class="cd cd3">
-                            <span>{{data.acc_typ}}</span>
+                            <span>{{data.username}}</span>
                         </div>
                         <div class="cd cd4">
-                            <span>{{data.acc_num | cardNoMask: status[0]}}</span>
+                            <span>{{data.loginid}}</span>
                         </div>
                         <div class="cd cd5">
-                            <span>{{data.brname}}</span>
+                            <span>{{ data.pass | passMask : status }}</span>
                         </div>
                         <div class="cd cd6">
-                            <span>{{data.ifsc}}</span>
-                        </div>
-                        <div class="cd cd7">
-                            <span>{{data.mirc| passMask: status[1]}}</span>
-                        </div>
-                        <div class="cd cd8">
                             <span>{{data.note}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-
         </mat-dialog-content>
 
         <mat-divider></mat-divider>
 
         <mat-dialog-actions align="center">
             <button mat-raised-button color="warn" [mat-dialog-close]="true"
-                [disabled]="!form.valid" (click)="onDelete(data.bid)">Delete This Data</button>
+                [disabled]="!form.valid" (click)="onDelete(data.id)">Delete This Data</button>
         </mat-dialog-actions>
+
     </div>
 </ng-template>
-
 
 
 <ng-template #template>
@@ -173,47 +136,38 @@
         </div>
 
         <mat-dialog-content class="mat-typography">
-            <form class="form" [formGroup]="form" >
-
+            <form class="form" [formGroup]="form">
                 <mat-form-field appearance="outline">
-                    <mat-label for="b_name">Bank Name</mat-label>
-                    <input matInput formControlName="b_name">
+                    <mat-label for="url">URL</mat-label>
+                    <input matInput formControlName="url">
+                    <mat-error *ngIf=" isUrlInvalid() && !form.get('url')?.errors?.['required'] ">Invalid
+                        URL</mat-error>
+                    <mat-error *ngIf="form.get('url')?.errors?.['required']">This field is required</mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label for="acc_type">Account Type</mat-label>
-                    <mat-select formControlName="acc_type" id="acc_type">
-                        <mat-option *ngFor="let acc of acc_type" [value]="acc">
-                            {{acc}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="name">Holder Name</mat-label>
+                    <mat-label for="name">Name</mat-label>
                     <input matInput formControlName="name">
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label for="acc_num">Account Number</mat-label>
-                    <input matInput type="number" formControlName="acc_num">
+                    <mat-label for="username">Username</mat-label>
+                    <input matInput formControlName="username">
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label for="ifsc">IFSC Code</mat-label>
-                    <input matInput formControlName="ifsc">
+                    <mat-label for="loginid">Login ID</mat-label>
+                    <input matInput formControlName="loginid">
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label for="rmn">Registered Mobile Number</mat-label>
-                    <input type="number" matInput formControlName="rmn">
+                    <mat-label>Enter your password</mat-label>
+                    <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                 </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="mirc">MIRC Code</mat-label>
-                    <input matInput formControlName="mirc">
-                </mat-form-field>
-
 
                 <mat-form-field appearance="outline">
                     <mat-label for="notes">Notes</mat-label>

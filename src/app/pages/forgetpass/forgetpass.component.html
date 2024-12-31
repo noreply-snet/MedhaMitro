@@ -1,1 +1,37 @@
-<p>forgetpass works!</p>
+<!-- <app-header [status]="btnS"></app-header> -->
+
+<div class="main">
+    <div class="co-main">
+
+        <div class="m-cont">
+            <div class="m-logo">
+                <div class="login">
+                    <span class="l-text">Forgot Password?</span>
+                    <span class="signup"> Enter your EMAIL and we'll send you a OTP for Verification</span>
+                </div>
+            </div>
+        </div>
+        <div class="m-body">
+            <div class="set1">
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>OTP</mat-label>
+                    <input matInput type="password" required>
+                </mat-form-field>
+
+            </div>
+
+            <div class="set2">
+
+                <button mat-raised-button color="primary" (click)="sEmail()">GET OTP</button>
+                <button mat-raised-button color="warn">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

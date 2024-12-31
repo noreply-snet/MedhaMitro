@@ -1,0 +1,84 @@
+.main {
+    width: 100%;
+}
+
+.header::before {
+    content: none;
+}
+
+.header {
+    margin-top: 20px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.header>button>mat-icon {
+    transform: rotateZ(45deg);
+}
+
+.form {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+/* ____________________________________________________________ */
+/* Style of View Note */
+
+.container>mat-dialog-content {
+    padding-top: 15px;
+}
+
+.container>mat-dialog-content>.action {
+    margin-bottom: 20px;
+}
+
+.action> :first-child {
+    margin-right: 1.5rem;
+}
+
+.cont {
+    display: flex;
+
+}
+
+.cont-fild {
+    margin-right: 1.1rem;
+}
+
+.cf {
+    margin-bottom: 1.2rem;
+}
+
+.cont-data {
+    display: flex;
+}
+
+.cl2>form {
+    margin: 0px;
+    padding: 0px;
+}
+
+.icon {
+    margin-bottom: 1.3rem;
+    margin-right: 1.1rem;
+}
+
+.cd {
+    margin-bottom: 1.6rem;
+}
+
+.cf>h3,
+.cd>span {
+    font-size: 1.1rem;
+}
+
+.cd>span {
+    font-weight: bold;
+}
