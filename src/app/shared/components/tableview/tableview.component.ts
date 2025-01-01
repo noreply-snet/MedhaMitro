@@ -1,12 +1,12 @@
 import { Component, ElementRef, input } from '@angular/core';
-import { DatashareService } from '../../core/services/datashare.service';
 import { MatDialog } from '@angular/material/dialog';
-import { PassDataInt } from '../../core/interface/interfaces.share';
 import { MatIconModule } from '@angular/material/icon';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { PassfromComponent } from '../../forms/passfrom/passfrom.component';
+import { PassDataInt } from '../../../core/interface/interfaces.share';
+import { DatashareService } from '../../../core/services/datashare.service';
+import { PassfromComponent } from '../../../forms/passfrom/passfrom.component';
 
 @Component({
   selector: 'app-tableview',

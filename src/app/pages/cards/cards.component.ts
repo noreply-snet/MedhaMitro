@@ -9,13 +9,13 @@ import { AtmData } from '../../core/interface/interfaces.share';
 import { MatDialog } from '@angular/material/dialog';
 import { DatashareService } from '../../core/services/datashare.service';
 import { Subscription } from 'rxjs';
-import { CardPipe } from '../../core/pipes/card.pipe';
-import { MaskingPipe } from '../../core/pipes/masking.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AtmfromComponent } from '../../forms/atmfrom/atmfrom.component';
-import { CommonImportsModule } from '../../core/modules/common-imports.module';
 import { CommonModule } from '@angular/common';
 import { atmDataSet } from '../../data/atmData';
+import { CardPipe } from '../../shared/pipes/card.pipe';
+import { MaskingPipe } from '../../shared/pipes/masking.pipe';
+import { CommonImportsModule } from '../../core/modules/common-imports.module';
 
 @Component({
   selector: 'app-cards',

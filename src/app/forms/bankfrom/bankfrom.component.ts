@@ -7,7 +7,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { CardNoMaskPipe, PassMaskPipe } from '../../core/pipes/masking.pipe';
+import { CardNoMaskPipe, PassMaskPipe } from '../../shared/pipes/masking.pipe';
+
 
 @Component({
   selector: 'app-bankfrom',

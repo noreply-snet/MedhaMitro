@@ -9,9 +9,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
-import { PassMaskPipe } from '../../core/pipes/masking.pipe';
 import { MatInputModule } from '@angular/material/input';
 import { CommonImportsModule } from '../../core/modules/common-imports.module';
+import { PassMaskPipe } from '../../shared/pipes/masking.pipe';
 
 @Component({
   selector: 'app-atmfrom',

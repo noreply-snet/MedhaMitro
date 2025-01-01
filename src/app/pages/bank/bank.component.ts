@@ -1,11 +1,11 @@
 import { Component, input, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BankinfoComponent } from '../../shared/bankinfo/bankinfo.component';
 import { DatashareService } from '../../core/services/datashare.service';
 import { BankData } from '../../core/interface/interfaces.share';
 import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
-import { MaskingPipe } from '../../core/pipes/masking.pipe';
+import { MaskingPipe } from '../../shared/pipes/masking.pipe';
+import { BankinfoComponent } from '../../shared/components/bankinfo/bankinfo.component';
 @Component({
   selector: 'app-bank',
   imports: [

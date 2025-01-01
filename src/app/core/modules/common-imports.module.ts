@@ -4,7 +4,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CardNoMaskPipe } from '../pipes/masking.pipe';
+import { CardNoMaskPipe } from '../../shared/pipes/masking.pipe';
+
 
 @NgModule({
   declarations: [

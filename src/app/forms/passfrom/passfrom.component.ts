@@ -4,9 +4,9 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { PassMaskPipe } from '../../core/pipes/masking.pipe';
 import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import { CommonModule } from '@angular/common';
+import { PassMaskPipe } from '../../shared/pipes/masking.pipe';
 
 @Component({
   selector: 'app-passfrom',
