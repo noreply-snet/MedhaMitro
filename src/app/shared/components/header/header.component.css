@@ -1,0 +1,50 @@
+
+mat-toolbar{
+    position: relative;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .2);
+    padding: 0;
+
+}
+.cont{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #673ab7;
+    padding: 10px;
+    
+}
+.logo,.other{
+    display: flex;
+    align-items: center;
+}
+.other>button{
+margin-left: 10px;
+}
+.b_name{
+    font-size: 2rem;
+}
+.search{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+
+}
+.search>input{
+    width: 20rem;
+    height: 2.5rem;
+    outline: none;
+    border-radius: 20px;
+    padding: 0 20px;
+    color:rgb(255, 255, 255);
+    
+    border: none;
+    background-color:rgb(153, 93, 244);
+    font-size: .95rem;   
+}
+.search>input:hover{
+    cursor: default;
+}
+
+.search>input::placeholder{
+color:rgba(255, 255, 255, 0.792);
+}

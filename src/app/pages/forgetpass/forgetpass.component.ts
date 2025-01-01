@@ -3,6 +3,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../../shared/components/header/header.component';
 
 @Component({
   selector: 'app-forgetpass',
@@ -10,6 +11,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     MatFormFieldModule,  
     ReactiveFormsModule,
+    HeaderComponent,
   ],
   templateUrl: './forgetpass.component.html',
   styleUrl: './forgetpass.component.css'

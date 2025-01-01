@@ -1,0 +1,48 @@
+
+.main{
+    width: 100vw;
+    height: 100%;
+}
+.sidebar{
+    width:300px;
+    position: relative;
+    height: 100%;
+    background:rgb(158, 161, 244);
+}
+.sidebar-manu li{
+    width:100%;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-manu a, .sidebar-manu button{
+    width: 100%;
+    height: 100%;
+    padding-left: .5rem;
+    display:flex;
+    align-items: center;
+    color:white;
+    font-size: 1.5rem;
+    text-decoration:none;
+    background:none;
+    border: none;
+    padding-left: 1rem;
+}
+.sidebar-manu>ul>li>a>span{
+    margin-left: 20px;
+}
+.sidebar-manu li:hover,.sidebar-manu button:hover{
+    background:rgb(10, 52, 167);
+    border-radius: 0  20px 20px 0;
+    cursor: pointer;
+}
+.sidebar-manu li.active{
+    background:rgb(10, 52, 167);
+    border-radius: 0  20px 20px 0;
+}
+
+.sidebar-manu li:nth-child(3),.sidebar-manu li:nth-child(5){
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgb(255,255,255);
+}

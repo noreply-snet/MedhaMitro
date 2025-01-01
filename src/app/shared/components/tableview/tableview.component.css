@@ -47,7 +47,6 @@ thead>tr>:first-child{
 }
 
 
-
 .sort {
     display: flex;
     flex-direction: row;
@@ -111,8 +110,6 @@ tr>th:nth-child(2) {
 .editbtn>button {
     margin-right: 10px;
 }
-
-
 
 .page-nav {
     display: flex;

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { AtmData } from '../interface/interfaces.share';
+import { AtmData } from '../../core/interface/interfaces.share';
 
 @Pipe({
   name: 'card'

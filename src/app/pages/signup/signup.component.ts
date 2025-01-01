@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { HeaderComponent } from '../../shared/components/header/header.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -11,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,  
     ReactiveFormsModule,
     MatIconModule,
+    HeaderComponent,
+    RouterLink,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
