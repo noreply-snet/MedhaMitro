@@ -5,7 +5,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { PassDataInt } from '../../../core/interface/interfaces.share';
-import { DatashareService } from '../../../core/services/datashare.service';
+import { DatashareService } from '../../services/datashare.service';
 import { PassfromComponent } from '../../../forms/passfrom/passfrom.component';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, input, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DatashareService } from '../../core/services/datashare.service';
+import { DatashareService } from '../../shared/services/datashare.service';
 import { BankData } from '../../core/interface/interfaces.share';
 import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';

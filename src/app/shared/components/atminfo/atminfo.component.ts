@@ -1,5 +1,4 @@
 import { Component, input } from '@angular/core';
-import { AtmData } from '../../core/interface/interfaces.share';
 
 
 @Component({

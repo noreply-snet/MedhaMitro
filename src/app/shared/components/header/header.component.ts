@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, input, signal } from '@angular/core';
-import { DatashareService } from '../../../core/services/datashare.service';
+import { DatashareService } from '../../services/datashare.service';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';

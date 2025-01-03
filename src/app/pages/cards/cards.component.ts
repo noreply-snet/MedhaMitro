@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AtmData } from '../../core/interface/interfaces.share';
 import { MatDialog } from '@angular/material/dialog';
-import { DatashareService } from '../../core/services/datashare.service';
+import { DatashareService } from '../../shared/services/datashare.service';
 import { Subscription } from 'rxjs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AtmfromComponent } from '../../forms/atmfrom/atmfrom.component';
