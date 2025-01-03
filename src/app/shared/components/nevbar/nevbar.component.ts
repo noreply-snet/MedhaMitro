@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-nevbar',
@@ -12,10 +13,13 @@ import { RouterLink } from '@angular/router';
   styleUrl: './nevbar.component.css'
 })
 export class NevbarComponent implements AfterViewInit {
+
+
   ngAfterViewInit(): void {
     // console.log(this.items);
   }
 
+  constructor (private authService: AuthService) { }
 
   status = 1;
 
@@ -52,6 +56,9 @@ export class NevbarComponent implements AfterViewInit {
     }
   ];
 
+  logOut() {
+    this.authService.logout();
+  }
 
 
 }

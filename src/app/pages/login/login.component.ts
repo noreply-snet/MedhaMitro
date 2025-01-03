@@ -7,11 +7,12 @@ import { HeaderComponent } from '../../shared/components/header/header.component
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
   imports: [
-    CommonModule,
+  CommonModule,
     MatFormFieldModule,  
     ReactiveFormsModule,
     MatIconModule,
@@ -31,21 +32,16 @@ export class LoginComponent {
 
   form : FormGroup;
 
-  // email = new FormControl('', [Validators.required, Validators.email]);
-
-  constructor(private fb: FormBuilder,){
+  constructor(private fb: FormBuilder,private authService: AuthService) {
     this.form = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  // getErrorMessage() {
-  //   if (this.email.hasError('required')) {
-  //     return 'You must enter a Value';
-  //   }
 
-  //   return this.email.hasError('email') ? 'Not a valid Email Address' : '';
-  // }
+  login() {
+    this.authService.login();
+  }
   
 }
