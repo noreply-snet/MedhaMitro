@@ -2,21 +2,25 @@ import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-notefrom',
   imports: [
-        CommonModule,
+    CommonModule,
     MatFormFieldModule,  
     MatIconModule,
     MatDialogModule,
     MatDividerModule,
     ReactiveFormsModule,
     CdkCopyToClipboard,
+    MatButtonModule,
+    MatInputModule,
   ],
   templateUrl: './notefrom.component.html',
   styleUrl: './notefrom.component.css'

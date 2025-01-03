@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
@@ -11,7 +11,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './nevbar.component.html',
   styleUrl: './nevbar.component.css'
 })
-export class NevbarComponent {
+export class NevbarComponent implements AfterViewInit {
+  ngAfterViewInit(): void {
+    // console.log(this.items);
+  }
 
 
   status = 1;
@@ -43,10 +46,12 @@ export class NevbarComponent {
       name: "Bank Accounts"
     },
     {
-      link: "/logout",
+      link: "",
       icon: "logout", // Material Icon name
       name: "LogOut"
     }
   ];
+
+
 
 }

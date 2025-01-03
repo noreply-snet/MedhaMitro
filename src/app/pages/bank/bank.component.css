@@ -1,0 +1,45 @@
+:host {
+    --primary-card: #6e2ee6;
+    --background-card: #9870cebb;
+}
+
+.container {
+    height: calc(100vh - 85px);
+    overflow-y: scroll;
+    padding: 1rem 0 0 2rem;
+}
+
+.main {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.footer {
+    content: "";
+    width: 100%;
+    height: 70px;
+    /* position: relative; */
+}
+
+.add-data {
+    position: absolute;
+    bottom: 2rem;
+    right: 3%;
+}
+
+.add-data> button{
+    background-color: #673ab7;
+}
+
+.add-data>button>mat-icon {
+    transform: scale(1.3);
+    z-index: 1;
+    color: #ededed;
+}
+
+.add-data>button:hover>mat-icon {
+    transition: transform ease-in .3s;
+    transform: rotateZ(180deg) scale(1.3);
+}

@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import { CommonModule } from '@angular/common';
 import { PassMaskPipe } from '../../shared/pipes/masking.pipe';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-passfrom',
@@ -19,6 +21,8 @@ import { PassMaskPipe } from '../../shared/pipes/masking.pipe';
     MatDividerModule,
     PassMaskPipe,
     CdkCopyToClipboard,
+    MatButtonModule,
+    MatInputModule,
 
   ],
   templateUrl: './passfrom.component.html',

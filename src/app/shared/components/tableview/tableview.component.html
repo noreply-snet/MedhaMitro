@@ -62,7 +62,7 @@
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tbody>
                         <tr
-                            *ngFor!="let user of dataSheet() |mslice:currentPage:item_per_page|passpipe:filter|mshort:fild:type:order ">
+                            *ngFor!="let user of dataSheet|mslice:currentPage:item_per_page|passpipe:filter|mshort:fild:type:order ">
                             <td class="td1">
                                 <span>{{user.id}}</span>
                             </td>

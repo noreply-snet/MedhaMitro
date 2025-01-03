@@ -1,0 +1,53 @@
+.cover {
+  padding: 2rem;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.data-body{
+  height: calc(100vh - 300px);
+  background-color: rgb(233, 232, 232);
+  overflow: hidden;
+  overflow-y: scroll;
+
+}
+
+.footer {
+  content: "";
+  width: 100%;
+  height: 70px;
+  /* position: relative; */
+}
+
+
+.add-data {
+    position: absolute;
+    bottom: 1rem;
+    right: 2rem;
+}
+.add-data>button{
+    background-color: #ec4879;
+}
+.add-data>button>mat-icon {
+    transform: scale(1.3);
+    z-index: 1;
+    color: #ededed;
+}
+
+.add-data>button:hover>mat-icon {
+    transition: transform ease-in .3s;
+    transform: rotateZ(180deg) scale(1.3);
+}
+
+
+/* td,
+th {
+  width: 25%;
+} */

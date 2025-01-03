@@ -53,7 +53,7 @@ export class HeaderComponent implements AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    console.log(this.status().values());
+    // console.log(this.status());
   }
 
 }

@@ -21,12 +21,14 @@ import { PassfromComponent } from '../../../forms/passfrom/passfrom.component';
 })
 
 // TODO: This component need to be fixed , now it is useless!
+
 export class TableviewComponent {
-  dataSheet = input<PassDataInt[]>([]);
+  dataSheet = [];
+  // dataSheet = input<PassDataInt[]>([]);
 
 // headerArray = ["SL No", "Website", "Name", "User Name", "DOB", "Last Seen", "Action"];
 
-  rowNumber = this.dataSheet().length;
+  rowNumber = this.dataSheet.length;
   keys: string[] = [];
 
 // rowNumber = 1;
@@ -189,8 +191,8 @@ export class TableviewComponent {
     this.ddf = this.dataShare.data$.subscribe((data) => {
       this.filter = data;
     });
-    this.keys = Object.keys(this.dataSheet()[0]);
-    console.log(Object.keys(this.dataSheet()[0]));
+    this.keys = Object.keys(this.dataSheet[0]);
+    console.log(Object.keys(this.dataSheet[0]));
   }
 
   ngOnDestroy(): void {

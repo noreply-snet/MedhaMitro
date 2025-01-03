@@ -40,51 +40,19 @@ mat-form-field {
     margin-bottom: 20px;
 }
 
-.action> :first-child {
-    margin-right: 1.5rem;
-}
-
-.cont {
-    display: flex;
-
-}
-
-.cont-data {
-    display: flex;
+tr > td {
+    padding: 10px;
 }
 
 .cf>h3 {
-    margin-right: 1.5rem;
     font-size: 1.2rem;
-    margin-bottom: 1.1rem;
 }
-
-
-
 
 .icon {
     cursor: pointer;
 }
 
-.icon>mat-icon {
-    margin-bottom: 1.1rem;
-}
-
-.ic3>mat-icon, .ic6>mat-icon {
-    margin-bottom: 0px;
-}
-.ic4,.ic7{
-    display: flex;
-    align-items: baseline;
-}
-
-
-.cd {
-    margin-bottom: 1.4rem;
-}
-
 .cd>mat-icon {
-    margin-right: 1.2rem;
     cursor: pointer;
 }
 
@@ -94,20 +62,11 @@ mat-form-field {
 }
 
 
-
-.cd6{
-    margin-bottom: 12px;
-}
-
-.cd7{
-    margin-bottom: 1.1rem;
-}
-
-
 .clicked {
     color: rgb(207, 177, 43);
 }
 
 .copied {
-    background-color: #673ab7;
+    background-color: #9267df;
+    color: white;
 }

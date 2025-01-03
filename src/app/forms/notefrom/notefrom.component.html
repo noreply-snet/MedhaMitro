@@ -1,12 +1,12 @@
 <ng-container *ngIf="data.type=='Form'">
-    <ng-container *ngTemplateOutlet="template"></ng-container>
+    <ng-container *ngTemplateOutlet="fromTemp"></ng-container>
 </ng-container>
 
 <ng-container *ngIf="data.type=='View'">
-    <ng-container *ngTemplateOutlet="template1"></ng-container>
+    <ng-container *ngTemplateOutlet="viewTemp"></ng-container>
 </ng-container>
 
-<ng-template #template1>
+<ng-template #viewTemp>
     <div class="container">
         <div mat-dialog-title class="header">
             <h2>{{title}}</h2>
@@ -27,50 +27,61 @@
             </div>
 
             <div class="cont">
-                <div class="cont-fild">
-                    <div class="cf cf1">
-                        <h3>Title:</h3>
-                    </div>
-                    <div class="cf cf2">
-                        <h3>Subtitle:</h3>
-                    </div>
-                    <div class="cf cf3">
-                        <h3>Note:</h3>
-                    </div>
-                </div>
-
-                <div class="cont-data">
-                    <div class="cl1">
-                        <div class="icon ic1">
-                            <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[1] }"
-                                (click)="clickedIcons[1]=!clickedIcons[1]" [cdkCopyToClipboard]="data.tit"
-                                fontIcon="content_copy"></mat-icon>
-                        </div>
-                        <div class="icon ic2">
-                            <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[2] }"
-                                (click)="clickedIcons[2]=!clickedIcons[2]" [cdkCopyToClipboard]="data.tag"
-                                fontIcon="content_copy"></mat-icon>
-                        </div>
-                        <div class="icon ic3">
-                            <mat-icon color="primary" [ngClass]="{ 'clicked': clickedIcons[3] }"
-                                (click)="clickedIcons[3]=!clickedIcons[3]" [cdkCopyToClipboard]="data.note"
-                                fontIcon="content_copy"></mat-icon>
-                        </div>
-                    </div>
-
-                    <div class="cl2">
-                        <div class="cd cd1">
-                            <span>{{data.tit}}</span>
-                        </div>
-                        <div class="cd cd2">
-                            <span>{{data.tag}}</span>
-                        </div>
-                        <div class="cd cd3">
-                            <span>{{data.note}}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <table>
+                  <tr>
+                    <td class="cf cf1">
+                      <h3>Title:</h3>
+                    </td>
+                    <td class="icon ic1">
+                      <mat-icon
+                        color="primary"
+                        [ngClass]="{ 'clicked': clickedIcons[1] }"
+                        (click)="clickedIcons[1]=!clickedIcons[1]"
+                        [cdkCopyToClipboard]="data.tit"
+                        fontIcon="content_copy"
+                      ></mat-icon>
+                    </td>
+                    <td class="cd cd1">
+                      <span>{{data.tit}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="cf cf2">
+                      <h3>Subtitle:</h3>
+                    </td>
+                    <td class="icon ic2">
+                      <mat-icon
+                        color="primary"
+                        [ngClass]="{ 'clicked': clickedIcons[2] }"
+                        (click)="clickedIcons[2]=!clickedIcons[2]"
+                        [cdkCopyToClipboard]="data.tag"
+                        fontIcon="content_copy"
+                      ></mat-icon>
+                    </td>
+                    <td class="cd cd2">
+                      <span>{{data.tag}}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="cf cf3">
+                      <h3>Note:</h3>
+                    </td>
+                    <td class="icon ic3">
+                      <mat-icon
+                        color="primary"
+                        [ngClass]="{ 'clicked': clickedIcons[3] }"
+                        (click)="clickedIcons[3]=!clickedIcons[3]"
+                        [cdkCopyToClipboard]="data.note"
+                        fontIcon="content_copy"
+                      ></mat-icon>
+                    </td>
+                    <td class="cd cd3">
+                      <span>{{data.note}}</span>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              
         </mat-dialog-content>
 
         <mat-divider></mat-divider>
@@ -85,7 +96,7 @@
 
 
 
-<ng-template #template>
+<ng-template #fromTemp>
     <div class="main">
         <div mat-dialog-title class="header">
             <h2>{{title}}</h2>

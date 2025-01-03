@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { CardNoMaskPipe, PassMaskPipe } from '../../shared/pipes/masking.pipe';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
@@ -23,6 +25,8 @@ import { CardNoMaskPipe, PassMaskPipe } from '../../shared/pipes/masking.pipe';
     CardNoMaskPipe,
     PassMaskPipe,
     ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
     
 
   ],

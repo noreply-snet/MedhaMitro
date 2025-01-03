@@ -33,6 +33,7 @@ mat-form-field {
 
 .container>mat-dialog-content {
     padding-top: 15px;
+    padding: 20px;
 }
 
 .container>mat-dialog-content>.action {
@@ -43,37 +44,6 @@ mat-form-field {
     margin-right: 1.5rem;
 }
 
-.cont {
-    display: flex;
-
-}
-
-.cont-fild {
-    margin-right: 1.1rem;
-}
-
-.cf {
-    margin-bottom: 1.2rem;
-}
-
-.cont-data {
-    display: flex;
-}
-
-.cl2>form {
-    margin: 0px;
-    padding: 0px;
-}
-
-.icon {
-    margin-bottom: 1.3rem;
-    margin-right: 1.1rem;
-}
-
-.cd {
-    margin-bottom: 1.6rem;
-}
-
 .cf>h3,
 .cd>span {
     font-size: 1.1rem;
@@ -81,4 +51,8 @@ mat-form-field {
 
 .cd>span {
     font-weight: bold;
+}
+
+tr > td{
+    padding: 10px ;
 }

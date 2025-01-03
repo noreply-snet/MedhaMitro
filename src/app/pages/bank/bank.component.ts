@@ -4,72 +4,40 @@ import { DatashareService } from '../../core/services/datashare.service';
 import { BankData } from '../../core/interface/interfaces.share';
 import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
-import { MaskingPipe } from '../../shared/pipes/masking.pipe';
+import { BankfromComponent } from '../../forms/bankfrom/bankfrom.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { BankPipe } from '../../shared/pipes/bank.pipe';
+import { bankDataSet } from '../../data/bankData';
 import { BankinfoComponent } from '../../shared/components/bankinfo/bankinfo.component';
 @Component({
   selector: 'app-bank',
   imports: [
     MatIconModule,
-    MatCardModule,
-    MaskingPipe
-    
-  ],
+    MatButtonModule,
+    MatTooltipModule,
+    BankPipe,
+    BankinfoComponent,
+],
   templateUrl: './bank.component.html',
   styleUrl: './bank.component.css',
 })
 export class BankComponent {
-  // @Input() dataChild: DataArray[] = [];
-  dataChild = input<BankData[]>();
 
+  dataChild: BankData[] = bankDataSet;
   filter: string = '';
   ddf: any;
 
   openFromDialog(): void {
-    const dialogRef = this.dialog.open(BankinfoComponent, {
+    const dialogRef = this.dialog.open(BankfromComponent, {
       width: '50%',
       data: { type: 'Form' },
-    });
-  }
-
-  openViewDialog(
-    id: number,
-    name: string,
-    rmn: string,
-    bname: string,
-    brname: string,
-    acc_typ: string,
-    acc_num: string,
-    ifsc: string,
-    mirc: string,
-    note: string
-  ): void {
-    const dialogRef = this.dialog.open(BankinfoComponent, {
-      width: '45%',
-      data: {
-        type: 'View',
-        bid: id,
-        name: name,
-        rmn: rmn,
-        bname: bname,
-        brname: brname,
-        acc_typ: acc_typ,
-        acc_num: acc_num,
-        ifsc: ifsc,
-        mirc: mirc,
-        note: note,
-      },
     });
   }
 
   constructor(private dataShare: DatashareService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    // this.sortdata = this.dataChild.map(data => {
-    //   return {
-    //     name: data.name,
-    //     acc_number: data.acc_number,
-    //   };
-    // });
 
     this.ddf = this.dataShare.data$.subscribe((data) => {
       this.filter = data;

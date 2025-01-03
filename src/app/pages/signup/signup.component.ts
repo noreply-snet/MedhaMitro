@@ -5,6 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +17,8 @@ import { RouterLink } from '@angular/router';
     MatIconModule,
     HeaderComponent,
     RouterLink,
+    MatButtonModule,
+    MatInputModule,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'

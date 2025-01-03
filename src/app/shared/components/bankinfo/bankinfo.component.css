@@ -1,0 +1,43 @@
+
+.cardsx {
+    width: 320px;
+    height: 220px;
+    margin: 0 1rem 1.5rem 0;
+}
+
+.example-card {
+    height: 100%;
+}
+
+mat-card {
+    border-radius: 1rem;
+    padding-bottom: 10px;
+}
+
+mat-card-header {
+    background: var(--background-card);
+    border-bottom: 3px solid var(--primary-card);
+    border-radius: 1rem 1rem 0 0;
+    margin-bottom: 10px;
+}
+
+
+.my-paragraph {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    overflow: hidden;
+}
+
+button {
+    margin-left: 10px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#btn1 {
+    background-color: var(--background-card);
+}

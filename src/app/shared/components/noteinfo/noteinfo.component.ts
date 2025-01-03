@@ -5,6 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { NotefromComponent } from '../../../forms/notefrom/notefrom.component';
 import { ColorInt, NoteDataInt } from '../../../core/interface/interfaces.share';
 import { DatashareService } from '../../../core/services/datashare.service';
+import { NotePipe } from '../../pipes/note.pipe';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -13,13 +16,16 @@ import { DatashareService } from '../../../core/services/datashare.service';
   imports: [
     MatCardModule,
     MatIconModule,
+    NotePipe,
+    MatButtonModule,
+    MatTooltipModule,
   ],
   templateUrl: './noteinfo.component.html',
   styleUrl: './noteinfo.component.css'
 })
 export class NoteinfoComponent {
 
-  dataChild = input<NoteDataInt[]>();
+  dataChild = input<NoteDataInt[]>([]);
 
   filter: string = '';
   subs: any;

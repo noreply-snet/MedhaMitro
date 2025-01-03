@@ -10,7 +10,7 @@
             <span class="b_name">Pass Bank</span>
 
         </div>
-        <div class="search" *ngIf="status().values()">
+        <div class="search" *ngIf="status()">
             <input id=searchber [(value)]="filterValue" (ngModelChange)="onDataChange()" type="search" placeholder="Search Here!">
         </div>
         <div class="other">

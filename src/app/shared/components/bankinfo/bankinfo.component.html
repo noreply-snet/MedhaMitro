@@ -1,1 +1,26 @@
-<p>bankinfo works!</p>
+<div class="cardsx">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-icon fontIcon="account_balance"></mat-icon>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="my-paragraph">
+                <div class="name">
+                    <p>
+                        <span>NAME:</span>
+                        <span>{{dataObj().name}}</span>
+                    </p>
+                </div>
+                <div class="acc_name">
+                    <p>
+                        <span>Account Number:</span>
+                    </p>
+                    <p>{{dataObj().acc_number|masking}}</p>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="openViewDialog(dataObj().id,dataObj().name,dataObj().rmn,dataObj().bank_name,dataObj().branch_name,dataObj().acc_type,dataObj().acc_number,dataObj().ifsc_code,dataObj().mirc_code,dataObj().note)" id="btn1">Details</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

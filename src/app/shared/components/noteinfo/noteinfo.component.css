@@ -43,8 +43,10 @@ mat-card-header {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
+    line-clamp: 4;
     overflow: hidden;
 }
+
 
 button {
     margin-left: 10px;
@@ -68,6 +70,10 @@ button:hover {
     position: absolute;
     bottom: 2%;
     right: 2% ;
+}
+.add-data>button {
+    background-color: #673ab7;
+    color: white;
 }
 
 .add-data>button>mat-icon {
