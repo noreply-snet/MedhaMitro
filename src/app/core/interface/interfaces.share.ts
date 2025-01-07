@@ -19,17 +19,6 @@ export interface BankData {
   rmn: string;
 }
 
-export interface ColorInt {
-  [key: string]: string;
-}
-
-export interface NoteColor {
-  name: string;
-  username: string;
-  para: string;
-  color: string;
-}
-
 export interface NoteDataInt {
   name: string;
   username: string;
@@ -47,3 +36,16 @@ export interface PassDataInt {
   last_seen: string;
   loginid: string;
 }
+
+
+export interface ColorInt {
+  [key: string]: string;
+}
+
+export interface NoteColor {
+  name: string;
+  username: string;
+  para: string;
+  color: string;
+}
+

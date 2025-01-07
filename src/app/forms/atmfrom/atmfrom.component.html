@@ -114,8 +114,11 @@
             <form class="form" [formGroup]="form">
 
                 <mat-form-field appearance="outline">
-                    <mat-label for="cardno">Card Number</mat-label>
-                    <input type="number" matInput formControlName="cardno">
+                    <mat-label for="card_number">Card Number</mat-label>
+                    <input type="number" matInput formControlName="card_number">
+                    <mat-error *ngIf="form.get('card_number')?.errors?.['required'] || form.get('card_number')?.dirty">
+                        Please enter a valid 16-digit Card No.
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">

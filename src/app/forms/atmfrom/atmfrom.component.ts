@@ -12,6 +12,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { CommonImportsModule } from '../../core/modules/common-imports.module';
 import { PassMaskPipe } from '../../shared/pipes/masking.pipe';
+import { AtmDataCreate, AtmDataRead } from '../../core/interface/api_int.share';
+import { AtmService } from '../../shared/services/atm.service';
 
 @Component({
   selector: 'app-atmfrom',
@@ -23,11 +25,10 @@ import { PassMaskPipe } from '../../shared/pipes/masking.pipe';
     PassMaskPipe,
     ReactiveFormsModule,
     MatInputModule,
-    
   ],
+  providers: [AtmService],
   templateUrl: './atmfrom.component.html',
   styleUrls: ['./atmfrom.component.css'],
-
 })
 export class AtmfromComponent implements OnInit {
   title: string = 'Add Card Details';
@@ -38,7 +39,7 @@ export class AtmfromComponent implements OnInit {
 
   form: FormGroup;
 
-  years: number[] = [];
+  years: string[] = [];
   months: string[] = [
     '01',
     '02',
@@ -56,22 +57,18 @@ export class AtmfromComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public dialogData: any
+    @Inject(MAT_DIALOG_DATA) public dialogData: any ,
+    private atmService: AtmService,
   ) {
     this.form = this.fb.group({
-      cardno: ['', Validators.required],
+      card_number: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]{16}$')],
+      ],
       name: ['', Validators.required],
       exp_month: ['', Validators.required],
       exp_year: ['', Validators.required],
-      cvv: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(2),
-          Validators.pattern('^[0-9]{3}$'),
-        ],
-      ],
+      cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3}$')]],
     });
 
     // Dynamically populate the years
@@ -82,14 +79,15 @@ export class AtmfromComponent implements OnInit {
   ngOnInit(): void {
     if (this.dialogData.type === 'View') {
       this.title = 'View Card Details';
-      this.form = this.fb.group({
-        cardno: [this.dialogData.cno],
-        name: [this.dialogData.cname, Validators.required],
-        exp_month: [
-          new Date(this.dialogData.exp).getMonth().toString().padStart(2, '0'),
-        ],
-        exp_year: [new Date(this.dialogData.exp).getFullYear()],
-        cvv: [this.dialogData.cvv, Validators.required],
+      this.form.patchValue({
+        card_number: this.dialogData.cno,
+        name: this.dialogData.cname,
+        exp_month: new Date(this.dialogData.exp)
+          .getMonth()
+          .toString()
+          .padStart(2, '0'),
+        exp_year: new Date(this.dialogData.exp).getFullYear(),
+        cvv: this.dialogData.cvv,
       });
     }
   }
@@ -100,10 +98,27 @@ export class AtmfromComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log('Form Submitted:', this.form.value);
+      const newAtm: AtmDataCreate = this.atmSerialize(this.form.value);
+      this.atmService.createAtm(newAtm).subscribe({
+        next: (atm: AtmDataRead) => {
+          console.log('Form Submitted:', atm);
+        },
+        error: (error) =>{
+          console.error('Form Submission Error:', error);
+        },
+      });
     } else {
       console.error('Form is invalid');
     }
+  }
+
+  atmSerialize(value: any): AtmDataCreate {
+    return {
+      card_number: String(value.card_number), // Ensure it's a string
+      name: value.name, // Name remains as-is
+      exp_date: `${value.exp_month}/${String(value.exp_year).slice(-2)}`, // Format as MM/YY
+      cvv: value.cvv
+    };
   }
 
   onUpdate() {
@@ -118,10 +133,10 @@ export class AtmfromComponent implements OnInit {
     console.log('Deleted ID:', id);
   }
 
-  generateYearRange(currentYear: number, numYears: number): number[] {
-    const years: number[] = [];
+  generateYearRange(currentYear: number, numYears: number): string[] {
+    const years: string[] = [];
     for (let i = 0; i <= numYears; i++) {
-      years.push(currentYear + i);
+      years.push(String(currentYear + i));
     }
     return years;
   }
@@ -129,5 +144,6 @@ export class AtmfromComponent implements OnInit {
   toggleClick(index: number): void {
     this.clickedIcons[index] = !this.clickedIcons[index];
   }
+
 
 }

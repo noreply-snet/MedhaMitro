@@ -28,6 +28,7 @@ export const routes: Routes = [
       { path: 'banks', component: BankComponent}
     ],
   },
+  
 
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 
