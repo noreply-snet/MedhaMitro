@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BankDataReUp, BankDataCreate } from '../../../core/interface/api_int.share';
+import { BankSharedService } from '../shared/bank-shared.service';
 
 @Injectable({
   providedIn: 'root'
