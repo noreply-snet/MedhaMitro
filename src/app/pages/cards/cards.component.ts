@@ -44,22 +44,10 @@ export class CardsComponent implements OnInit, OnDestroy {
       this.atmsData = data;
     });
 
-    this.fetchAllAtms();
+    this.atmApi.fetchAllAtms();
     
   }
 
-  fetchAllAtms(): void {
-    this.ddf = this.atmApi.getAllAtms().subscribe({
-      next: (data: AtmDataReUp[]) => {
-        this.atmsData = data;
-        this.atmDataShear.setAtmsData(data);
-        console.log('Fetched ATM Data:', this.atmsData);
-      },
-      error: (error) => {
-        console.error('Error fetching ATM data:', error);
-      },
-    });
-  }
 
   ngOnDestroy(): void {
     if (this.ddf) {
