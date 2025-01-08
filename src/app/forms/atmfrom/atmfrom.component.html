@@ -65,7 +65,7 @@
                     </td>
                     <td class="cl2"></td>
                     <td class="cd cd3">
-                        <span>{{dialogData.exp | date: 'M/y'}}</span>
+                        <span>{{dialogData.exp}}</span>
                     </td>
                 </tr>
                 <tr>
@@ -94,7 +94,7 @@
 
         <mat-dialog-actions align="center">
             <button mat-raised-button color="warn" [mat-dialog-close]="true"
-                [disabled]="!form.valid" (click)="onDelete(dialogData.cno)">Delete This Data</button>
+                [disabled]="!form.valid" (click)="onDelete(dialogData.card_id)">Delete This Data</button>
         </mat-dialog-actions>
     </div>
 

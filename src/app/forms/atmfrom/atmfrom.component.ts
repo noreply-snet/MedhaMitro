@@ -12,8 +12,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { CommonImportsModule } from '../../core/modules/common-imports.module';
 import { PassMaskPipe } from '../../shared/pipes/masking.pipe';
-import { AtmDataCreate, AtmDataRead } from '../../core/interface/api_int.share';
+import { AtmDataCreate, AtmDataReUp } from '../../core/interface/api_int.share';
 import { AtmService } from '../../shared/services/atm.service';
+import { AtmSharedService } from '../../shared/services/atm-shared.service';
 
 @Component({
   selector: 'app-atmfrom',
@@ -59,8 +60,10 @@ export class AtmfromComponent implements OnInit {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public dialogData: any ,
     private atmService: AtmService,
+    private atmShareData : AtmSharedService,
   ) {
     this.form = this.fb.group({
+      id:'',
       card_number: [
         '',
         [Validators.required, Validators.pattern('^[0-9]{16}$')],
@@ -80,14 +83,12 @@ export class AtmfromComponent implements OnInit {
     if (this.dialogData.type === 'View') {
       this.title = 'View Card Details';
       this.form.patchValue({
+        id: this.dialogData.card_id,
         card_number: this.dialogData.cno,
         name: this.dialogData.cname,
-        exp_month: new Date(this.dialogData.exp)
-          .getMonth()
-          .toString()
-          .padStart(2, '0'),
-        exp_year: new Date(this.dialogData.exp).getFullYear(),
-        cvv: this.dialogData.cvv,
+        exp_month: this.dialogData.exp.split('/')[0],
+        exp_year: '20'+String(this.dialogData.exp).split('/')[1],
+        cvv: this.dialogData.cvv
       });
     }
   }
@@ -100,8 +101,9 @@ export class AtmfromComponent implements OnInit {
     if (this.form.valid) {
       const newAtm: AtmDataCreate = this.atmSerialize(this.form.value);
       this.atmService.createAtm(newAtm).subscribe({
-        next: (atm: AtmDataRead) => {
+        next: (atm: AtmDataReUp) => {
           console.log('Form Submitted:', atm);
+          this.atmShareData.addAtm(atm);
         },
         error: (error) =>{
           console.error('Form Submission Error:', error);
@@ -123,15 +125,52 @@ export class AtmfromComponent implements OnInit {
 
   onUpdate() {
     if (this.form.valid) {
-      console.log('Form Updated:', this.form.value);
+      const updatedAtm: AtmDataReUp = this.atmUpdateSerialize(this.form.value);
+      this.atmService.updateAtm(updatedAtm).subscribe({
+        next: (atm: AtmDataReUp) => {
+          console.log('ATM Updated:', atm);
+          this.atmShareData.updateAtm(atm);
+        },
+        error: (error) => {
+          console.error('Update Error:', error);
+        },
+      });
     } else {
       console.error('Form is invalid');
     }
   }
 
-  onDelete(id: string) {
-    console.log('Deleted ID:', id);
+  atmUpdateSerialize(value: any): AtmDataReUp {
+    return {
+      id: value.id, // Ensure the ID is passed correctly
+      card_number: String(value.card_number), // Ensure it's a string
+      name: value.name, // Name remains as-is
+      exp_date: `${value.exp_month}/${String(value.exp_year).slice(-2)}`, // Format as MM/YY
+      cvv: value.cvv, // CVV remains as-is
+    };
   }
+  
+  onDelete(id: number): void {
+    if (id) {
+      this.atmService.deleteAtm(id).subscribe({
+        next: (response: { msg: string }) => {
+          console.log(response);
+
+          // You can also update the UI to reflect the deletion
+          this.atmShareData.removeAtmById(id);
+        },
+        error: (error) => {
+          console.error('Delete Error:', error);
+        },
+      });
+    } else {
+      console.error('Invalid ID');
+    }
+  }
+  
+  
+
+  
 
   generateYearRange(currentYear: number, numYears: number): string[] {
     const years: string[] = [];

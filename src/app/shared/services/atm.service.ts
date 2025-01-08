@@ -1,29 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AtmDataCreate, AtmDataRead, AtmDataUpdate } from '../../core/interface/api_int.share';
+import { AtmDataCreate, AtmDataReUp } from '../../core/interface/api_int.share';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AtmService {
-  private apiUrl = "http://127.0.0.1:8000/atm/";
+  private apiUrl = "http://127.0.0.1:8000/atm";
 
   constructor(private http: HttpClient) {}
 
-  createAtm(atm: AtmDataCreate): Observable<AtmDataRead> {
-    return this.http.post<AtmDataRead>(this.apiUrl, atm);
+  getAllAtms(): Observable<AtmDataReUp[]> {
+    return this.http.get<AtmDataReUp[]>(`${this.apiUrl}/all`);
+  }  
+
+  createAtm(atm: AtmDataCreate): Observable<AtmDataReUp> {
+    return this.http.post<AtmDataReUp>(`${this.apiUrl}/`, atm);
   }
 
-  readAtm(atm_id: number): Observable<AtmDataRead> {
-    return this.http.get<AtmDataRead>(`${this.apiUrl}/${atm_id}`);
+  readAtm(atm_id: number): Observable<AtmDataReUp> {
+    return this.http.get<AtmDataReUp>(`${this.apiUrl}/${atm_id}`);
   }
 
-  updateAtm(atm_id: number, atm: AtmDataUpdate): Observable<AtmDataRead> {
-    return this.http.put<AtmDataRead>(`${this.apiUrl}/${atm_id}`, atm);
+  updateAtm(atm: AtmDataReUp): Observable<AtmDataReUp> {
+    return this.http.put<AtmDataReUp>(`${this.apiUrl}/`, atm);
   }
   
-  deleteAtm(atm_id: number): Observable<AtmDataRead> {
-    return this.http.delete<AtmDataRead>(`${this.apiUrl}/${atm_id}`);
+  deleteAtm(atm_id: number): Observable<{ msg: string }> {
+    return this.http.delete<{ msg: string }>(`${this.apiUrl}/${atm_id}`);
   }
+  
 }

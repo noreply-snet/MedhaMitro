@@ -1,1 +1,109 @@
-<p>atminfo works!</p>
+<div class="container">
+  <div
+  class="card"
+  *ngFor="let item of getDATA() | card : filter; let i = index"
+  >
+  <!-- Front Card -->
+  <div
+    #frontCard
+    class="card__front card__part"
+    (mouseenter)="onShow(i)"
+    (mouseleave)="onHide(i)"
+    [ngClass]="'front' + i"
+  >
+    <mat-icon
+      #Icons
+      class="swap matm"
+      [ngClass]="'mat' + i"
+      (click)="onEnter(i)"
+      fontIcon="swap_horiz"
+    ></mat-icon>
+    <div class="info">
+      <p class="copy">
+        <mat-icon
+          #Icons
+          [cdkCopyToClipboard]="item.card_number + ''"
+          [ngClass]="'mat' + i"
+          class="matm"
+          fontIcon="content_copy"
+        ></mat-icon>
+      </p>
+      <p class="card_numer">
+        {{ item.card_number + "" | cardNoMask : true | masking }}
+      </p>
+      <div class="card__space-75">
+        <span class="card__label">Card holder</span>
+        <p class="card__info">{{ item.name }}</p>
+      </div>
+      <div class="card__space-25">
+        <span class="card__label">Expires</span>
+        <p class="card__info">{{ item.exp_date }}</p>
+      </div>
+    </div>
+    <div class="action">
+      <mat-icon
+        #Icons
+        [ngClass]="'mat' + i"
+        [cdkCopyToClipboard]="
+          'Card Holder: ' +
+          item.name +
+          '\n' +
+          'Card No: ' +
+          item.card_number +
+          '\n' +
+          'Expire Date: ' +
+          item.exp_date +
+          '\n' +
+          'CVV: ' +
+          item.cvv
+        "
+        class="matm"
+        fontIcon="content_copy"
+      ></mat-icon>
+      <mat-icon
+        #Icons
+        [ngClass]="'mat' + i"
+        class="matm"
+        fontIcon="edit"
+        (click)="
+          openViewDialog(
+            item.id,
+            item.card_number,
+            item.name,
+            item.exp_date,
+            item.cvv
+          )
+        "
+      ></mat-icon>
+    </div>
+  </div>
+  
+  <!-- Back Card -->
+  <div
+    #backCard
+    class="card__back card__part"
+    (mouseleave)="onLeave(i)"
+    [ngClass]="'back' + i"
+  >
+    <mat-icon
+    #Icons
+      class="swap"
+      (click)="onEnter(i)"
+      fontIcon="swap_horiz"
+    ></mat-icon>
+    <div class="card__black-line"></div>
+    <div class="card__back-content">
+      <div class="card__secret">
+        <p class="card__secret--last">
+          {{ item.cvv }}
+          <mat-icon
+          #Icons
+            [cdkCopyToClipboard]="item.cvv + ''"
+            fontIcon="content_copy"
+          ></mat-icon>
+        </p>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

@@ -1,11 +1,3 @@
-export interface AtmDataRead {
-  id: number;
-  card_number: string;
-  name: string;
-  exp_date: string;
-  cvv: number;
-  created_at: Date;
-}
 
 export interface AtmDataCreate {
   card_number: string;
@@ -14,7 +6,7 @@ export interface AtmDataCreate {
   cvv: number;
 }
 
-export interface AtmDataUpdate {
+export interface AtmDataReUp {
   id: number;
   card_number: string;
   name: string;
@@ -22,21 +14,8 @@ export interface AtmDataUpdate {
   cvv: number;
 }
 
-export interface BankDataRead {
-  id: number;
-  name: string;
-  bank_name: string;
-  branch_name: string;
-  acc_type: string;
-  acc_number: string;
-  ifsc_code: string;
-  mirc_code: string;
-  note: string;
-  rmn: string;
-  created_at: Date;
-}
 
-export interface BankDataUpdate {
+export interface BankDataReUp {
   id: number;
   name: string;
   bank_name: string;
@@ -61,16 +40,8 @@ export interface BankDataCreate {
   rmn: string;
 }
 
-export interface NoteDataRead {
-  id: number;
-  title: string;
-  tags: [string]; //string;
-  para: string;
-  color: string;
-  created_at: Date;
-}
 
-export interface NoteDataUptade {
+export interface NoteDataReUp {
   id: number;
   title: string;
   tags: [string]; //string;
@@ -85,18 +56,8 @@ export interface NoteDataCreate {
   color: string;
 }
 
-export interface PassDataRead {
-  id: number;
-  acc_name: string;
-  url: string;
-  loginid: string;
-  password: string;
-  ass_email: string;
-  notes: string;
-  created_at: Date;
-}
 
-export interface PassDataUpdate {
+export interface PassDataReUp {
   id: number;
   acc_name: string;
   url: string;
