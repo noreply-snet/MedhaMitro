@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { DatashareService } from '../shared/services/datashare.service';
+import { DatashareService } from '../shared/services/shared/datashare.service';
 import { filter } from 'rxjs';
 import { NevbarComponent } from '../shared/components/nevbar/nevbar.component';
 import { HeaderComponent } from '../shared/components/header/header.component';

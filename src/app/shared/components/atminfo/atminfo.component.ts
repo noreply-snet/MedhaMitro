@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { DatashareService } from '../../services/datashare.service';
+import { DatashareService } from '../../services/shared/datashare.service';
 import { AtmfromComponent } from '../../../forms/atmfrom/atmfrom.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';

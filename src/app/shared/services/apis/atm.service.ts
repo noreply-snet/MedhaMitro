@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AtmDataCreate, AtmDataReUp } from '../../core/interface/api_int.share';
+import { AtmDataCreate, AtmDataReUp } from '../../../core/interface/api_int.share';
 import { Observable} from 'rxjs';
-import { AtmSharedService } from './atm-shared.service';
+import { AtmSharedService } from '../shared/atm-shared.service';
 
 @Injectable({
   providedIn: 'root',

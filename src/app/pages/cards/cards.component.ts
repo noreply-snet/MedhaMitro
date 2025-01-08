@@ -11,8 +11,8 @@ import { CommonModule } from '@angular/common';
 import { CommonImportsModule } from '../../core/modules/common-imports.module';
 import { AtminfoComponent } from '../../shared/components/atminfo/atminfo.component';
 import { AtmDataReUp } from '../../core/interface/api_int.share';
-import { AtmService } from '../../shared/services/atm.service';
-import { AtmSharedService } from '../../shared/services/atm-shared.service';
+import { AtmService } from '../../shared/services/apis/atm.service';
+import { AtmSharedService } from '../../shared/services/shared/atm-shared.service';
 
 @Component({
   selector: 'app-cards',

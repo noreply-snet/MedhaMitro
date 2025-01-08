@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonImportsModule } from '../../core/modules/common-imports.module';
 import { PassMaskPipe } from '../../shared/pipes/masking.pipe';
 import { AtmDataCreate, AtmDataReUp } from '../../core/interface/api_int.share';
-import { AtmService } from '../../shared/services/atm.service';
+import { AtmService } from '../../shared/services/apis/atm.service';
 
 @Component({
   selector: 'app-atmfrom',
