@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { BankDataReUp } from '../../../core/interface/api_int.share';
+import { BankData } from '../../../core/interface/api_int.share';
 
 @Injectable({
   providedIn: 'root'
@@ -10,22 +10,22 @@ export class BankSharedService {
   constructor() { }
 
 
-  private banksDataSubject = new BehaviorSubject<BankDataReUp[]>([]); // Initial list
+  private banksDataSubject = new BehaviorSubject<BankData[]>([]); // Initial list
   banksData$ = this.banksDataSubject.asObservable(); // Observable to subscribe to
 
   // Set the complete list of banks
-  setBanksData(data: BankDataReUp[]): void {
+  setBanksData(data: BankData[]): void {
     this.banksDataSubject.next(data); // Assign the new data to the list
   }
 
   // Add a new bank
-  addBank(newBank: BankDataReUp): void {
+  addBank(newBank: BankData): void {
     const currentData = this.banksDataSubject.value;
     this.banksDataSubject.next([...currentData, newBank]); // Add new bank and update the list
   }
 
   // Update an existing bank by ID
-  updateBank(updatedBank: BankDataReUp): void {
+  updateBank(updatedBank: BankData): void {
     const currentData = this.banksDataSubject.value;
     const updatedData = currentData.map((bank) =>
       bank.id === updatedBank.id ? updatedBank : bank // Update the bank by ID

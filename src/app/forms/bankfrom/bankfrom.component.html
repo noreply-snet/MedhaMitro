@@ -1,300 +1,370 @@
-<ng-container *ngIf="data.type=='Form'">
-    <ng-container *ngTemplateOutlet="formTemp"></ng-container>
+<ng-container *ngIf="dialogData.type == 'Form'">
+  <ng-container *ngTemplateOutlet="formTemp"></ng-container>
 </ng-container>
 
-<ng-container *ngIf="data.type=='View'">
-    <ng-container *ngTemplateOutlet="viewTemp"></ng-container>
+<ng-container *ngIf="dialogData.type == 'View'">
+  <ng-container *ngTemplateOutlet="viewTemp"></ng-container>
 </ng-container>
-
 
 <ng-template #viewTemp>
-    <div class="container">
-        <div mat-dialog-title class="header">
-            <h2>{{title}}</h2>
-            <button [mat-dialog-close]="true" mat-mini-fab color="primary" aria-label="dialog close button">
-                <mat-icon>add</mat-icon>
-            </button>
-        </div>
-        <mat-dialog-content class="mat-typography">
-            <div class="action">
-                <button mat-raised-button color="primary"
-                    (click)="edit_mode=true;title='Edit Bank Details';data.type='Form'">Edit</button>
-                <button mat-raised-button color="accent" [ngClass]="{ 'copied': clickedIcons[0]}"
-                    (click)="clickedIcons[0]=!clickedIcons[0]"
-                    [cdkCopyToClipboard]="'Bank Name: '+data.bname+'\n'+'Account Type: '+ data.acc_typ+'\n'+'Holder Name: '+ data.name+'\n'+'Account Number: '+ data.acc_num+'\n'+'IFSC Code: '+data.ifsc"
-                    aria-label="dialog content copy button">
-                    Copy All
-                </button>
-            </div>
-
-            <div class="cont">
-                <table>
-                  <tr>
-                    <td class="cf cf1">
-                      <h3>Holder Name:</h3>
-                    </td>
-                    <td class="icon ic1">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[1] }"
-                        (click)="clickedIcons[1]=!clickedIcons[1]"
-                        [cdkCopyToClipboard]="data.name"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td></td>
-                    <td class="cd cd1">
-                      <span>{{data.name}}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cf cf1a">
-                      <h3>Registered Mobile Number:</h3>
-                    </td>
-                    <td class="icon ic1a">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[9] }"
-                        (click)="clickedIcons[9]=!clickedIcons[9]"
-                        [cdkCopyToClipboard]="data.rmn"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td></td>
-                    <td class="cd cd1a">
-                      <span>{{data.rmn}}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cf cf2">
-                      <h3>Bank Name:</h3>
-                    </td>
-                    <td class="icon ic2">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[2] }"
-                        (click)="clickedIcons[2]=!clickedIcons[2]"
-                        [cdkCopyToClipboard]="data.bname"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td></td>
-                    <td class="cd cd2">
-                      <span>{{data.bname}}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cf cf3">
-                      <h3>Account Type:</h3>
-                    </td>
-                    <td class="icon ic3">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[3] }"
-                        (click)="clickedIcons[3]=!clickedIcons[3]"
-                        [cdkCopyToClipboard]="data.acc_typ"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td></td>
-                    <td class="cd cd3">
-                      <span>{{data.acc_typ}}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cf cf4">
-                      <h3>Account Number:</h3>
-                    </td>
-                    <td class="icon ic4">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[4] }"
-                        (click)="clickedIcons[4]=!clickedIcons[4]"
-                        [cdkCopyToClipboard]="data.acc_num"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td>
-                      <button
-                        mat-icon-button
-                        matSuffix
-                        (click)="status[0] = !status[0]"
-                        [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="status[0]"
-                      >
-                        <mat-icon>{{status[0] ? 'visibility_off' : 'visibility'}}</mat-icon>
-                      </button>
-                    </td>
-                    <td class="cd cd4">
-                      <span>{{data.acc_num | cardNoMask: status[0]}}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cf cf5">
-                      <h3>Branch Name:</h3>
-                    </td>
-                    <td class="icon ic5">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[5] }"
-                        (click)="clickedIcons[5]=!clickedIcons[5]"
-                        [cdkCopyToClipboard]="data.brname"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td></td>
-                    <td class="cd cd5">
-                      <span>{{data.brname}}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cf cf6">
-                      <h3>IFSC Code:</h3>
-                    </td>
-                    <td class="icon ic6">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[6] }"
-                        (click)="clickedIcons[6]=!clickedIcons[6]"
-                        [cdkCopyToClipboard]="data.ifsc"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td></td>
-                    <td class="cd cd6">
-                      <span>{{data.ifsc}}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cf cf7">
-                      <h3>MIRC Code:</h3>
-                    </td>
-                    <td class="icon ic7">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[7] }"
-                        (click)="clickedIcons[7]=!clickedIcons[7]"
-                        [cdkCopyToClipboard]="data.mirc"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td>
-                      <button
-                        mat-icon-button
-                        matSuffix
-                        (click)="status[1] = !status[1]"
-                        [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="status[1]"
-                      >
-                        <mat-icon>{{status[1] ? 'visibility_off' : 'visibility'}}</mat-icon>
-                      </button>
-                    </td>
-                    <td class="cd cd7">
-                      <span>{{data.mirc | passMask: status[1]}}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cf cf8">
-                      <h3>Note:</h3>
-                    </td>
-                    <td class="icon ic8">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[8] }"
-                        (click)="clickedIcons[8]=!clickedIcons[8]"
-                        [cdkCopyToClipboard]="data.note"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td></td>
-                    <td class="cd cd8">
-                      <span>{{data.note}}</span>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              
-
-        </mat-dialog-content>
-
-        <mat-divider></mat-divider>
-
-        <mat-dialog-actions align="center">
-            <button mat-raised-button color="warn" [mat-dialog-close]="true"
-                [disabled]="!form.valid" (click)="onDelete(data.bid)">Delete This Data</button>
-        </mat-dialog-actions>
+  <div class="container">
+    <div mat-dialog-title class="header">
+      <h2>{{ title }}</h2>
+      <button
+        [mat-dialog-close]="true"
+        mat-mini-fab
+        color="primary"
+        aria-label="dialog close button"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
+    <mat-dialog-content class="mat-typography">
+      <div class="action">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="
+            edit_mode = true;
+            title = 'Edit Bank Details';
+            dialogData.type = 'Form'
+          "
+        >
+          Edit
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          [ngClass]="{ copied: clickedIcons[0] }"
+          (click)="clickedIcons[0] = !clickedIcons[0]"
+          [cdkCopyToClipboard]="
+            'Bank Name: ' +
+            dialogData.bank_name +
+            '\n' +
+            'Account Type: ' +
+            dialogData.acc_type +
+            '\n' +
+            'Holder Name: ' +
+            dialogData.name +
+            '\n' +
+            'Account Number: ' +
+            dialogData.acc_number +
+            '\n' +
+            'IFSC Code: ' +
+            dialogData.ifsc_code
+          "
+          aria-label="dialog content copy button"
+        >
+          Copy All
+        </button>
+      </div>
+
+      <div class="cont">
+        <table>
+          <tr>
+            <td class="cf cf1">
+              <h3>Holder Name:</h3>
+            </td>
+            <td class="icon ic1">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[1] }"
+                (click)="clickedIcons[1] = !clickedIcons[1]"
+                [cdkCopyToClipboard]="dialogData.name"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td></td>
+            <td class="cd cd1">
+              <span>{{ dialogData.name }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="cf cf1a">
+              <h3>Registered Mobile Number:</h3>
+            </td>
+            <td class="icon ic1a">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[9] }"
+                (click)="clickedIcons[9] = !clickedIcons[9]"
+                [cdkCopyToClipboard]="dialogData.rmn"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td></td>
+            <td class="cd cd1a">
+              <span>{{ dialogData.rmn }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="cf cf2">
+              <h3>Bank Name:</h3>
+            </td>
+            <td class="icon ic2">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[2] }"
+                (click)="clickedIcons[2] = !clickedIcons[2]"
+                [cdkCopyToClipboard]="dialogData.bank_name"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td></td>
+            <td class="cd cd2">
+              <span>{{ dialogData.bank_name }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="cf cf3">
+              <h3>Account Type:</h3>
+            </td>
+            <td class="icon ic3">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[3] }"
+                (click)="clickedIcons[3] = !clickedIcons[3]"
+                [cdkCopyToClipboard]="dialogData.acc_type"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td></td>
+            <td class="cd cd3">
+              <span>{{ dialogData.acc_type }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="cf cf4">
+              <h3>Account Number:</h3>
+            </td>
+            <td class="icon ic4">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[4] }"
+                (click)="clickedIcons[4] = !clickedIcons[4]"
+                [cdkCopyToClipboard]="dialogData.acc_number"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td>
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="status[0] = !status[0]"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="status[0]"
+              >
+                <mat-icon>{{
+                  status[0] ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+            </td>
+            <td class="cd cd4">
+              <span>{{ dialogData.acc_number | cardNoMask : status[0] }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="cf cf5">
+              <h3>Branch Name:</h3>
+            </td>
+            <td class="icon ic5">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[5] }"
+                (click)="clickedIcons[5] = !clickedIcons[5]"
+                [cdkCopyToClipboard]="dialogData.bank_name"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td></td>
+            <td class="cd cd5">
+              <span>{{ dialogData.bank_name }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="cf cf6">
+              <h3>IFSC Code:</h3>
+            </td>
+            <td class="icon ic6">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[6] }"
+                (click)="clickedIcons[6] = !clickedIcons[6]"
+                [cdkCopyToClipboard]="dialogData.ifsc_code"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td></td>
+            <td class="cd cd6">
+              <span>{{ dialogData.ifsc_code }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="cf cf7">
+              <h3>MIRC Code:</h3>
+            </td>
+            <td class="icon ic7">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[7] }"
+                (click)="clickedIcons[7] = !clickedIcons[7]"
+                [cdkCopyToClipboard]="dialogData.mirc_code"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td>
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="status[1] = !status[1]"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="status[1]"
+              >
+                <mat-icon>{{
+                  status[1] ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+            </td>
+            <td class="cd cd7">
+              <span>{{ dialogData.mirc_code | passMask : status[1] }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="cf cf8">
+              <h3>Note:</h3>
+            </td>
+            <td class="icon ic8">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[8] }"
+                (click)="clickedIcons[8] = !clickedIcons[8]"
+                [cdkCopyToClipboard]="dialogData.note"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td></td>
+            <td class="cd cd8">
+              <span>{{ dialogData.note }}</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </mat-dialog-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-dialog-actions align="center">
+      <button
+        mat-raised-button
+        color="warn"
+        [mat-dialog-close]="true"
+        [disabled]="!form.valid"
+        (click)="onDelete(dialogData.id)"
+      >
+        Delete This Data
+      </button>
+    </mat-dialog-actions>
+  </div>
 </ng-template>
 
-
-
 <ng-template #formTemp>
-    <div class="main">
-        <div mat-dialog-title class="header">
-            <h2>{{title}}</h2>
-            <button [mat-dialog-close]="true" mat-mini-fab color="primary" aria-label="dialog close button">
-                <mat-icon>add</mat-icon>
-            </button>
-        </div>
-
-        <mat-dialog-content class="mat-typography">
-            <form class="form" [formGroup]="form" >
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="b_name">Bank Name</mat-label>
-                    <input matInput formControlName="b_name">
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="acc_type">Account Type</mat-label>
-                    <mat-select formControlName="acc_type" id="acc_type">
-                        <mat-option *ngFor="let acc of acc_type" [value]="acc">
-                            {{acc}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="name">Holder Name</mat-label>
-                    <input matInput formControlName="name">
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="acc_num">Account Number</mat-label>
-                    <input matInput type="number" formControlName="acc_num">
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="ifsc">IFSC Code</mat-label>
-                    <input matInput formControlName="ifsc">
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="rmn">Registered Mobile Number</mat-label>
-                    <input type="number" matInput formControlName="rmn">
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="mirc">MIRC Code</mat-label>
-                    <input matInput formControlName="mirc">
-                </mat-form-field>
-
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="notes">Notes</mat-label>
-                    <textarea matInput formControlName="notes"></textarea>
-                </mat-form-field>
-            </form>
-        </mat-dialog-content>
-
-        <mat-dialog-actions align="end">
-            <button *ngIf="!edit_mode" mat-raised-button color="warn" (click)="onClear()">Clear</button>
-            <button *ngIf="!edit_mode" mat-raised-button color="primary" [mat-dialog-close]="true"
-                [disabled]="!form.valid" (click)="onSubmit()">Submit</button>
-
-            <button *ngIf="edit_mode" mat-raised-button color="accent" [mat-dialog-close]="true"
-                [disabled]="!form.valid" (click)="onUpdate()">Update</button>
-        </mat-dialog-actions>
-
+  <div class="main">
+    <div mat-dialog-title class="header">
+      <h2>{{ title }}</h2>
+      <button
+        [mat-dialog-close]="true"
+        mat-mini-fab
+        color="primary"
+        aria-label="dialog close button"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
+
+    <mat-dialog-content class="mat-typography">
+      <form class="form" [formGroup]="form">
+        
+        <mat-form-field appearance="outline">
+          <mat-label for="bank_name">Bank Name</mat-label>
+          <input matInput formControlName="bank_name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label for="branch_name">Branch Name</mat-label>
+          <input matInput formControlName="branch_name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label for="acc_type">Account Type</mat-label>
+          <mat-select formControlName="acc_type" id="acc_type">
+            <mat-option *ngFor="let acc of acc_types" [value]="acc">
+              {{ acc }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label for="name">Holder Name</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label for="acc_number">Account Number</mat-label>
+          <input matInput type="number" formControlName="acc_number" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label for="ifsc_code">IFSC Code</mat-label>
+          <input matInput formControlName="ifsc_code" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label for="rmn">Registered Mobile Number</mat-label>
+          <input type="number" matInput formControlName="rmn" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label for="mirc_code">MIRC Code</mat-label>
+          <input matInput formControlName="mirc_code" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label for="note">Notes</mat-label>
+          <textarea matInput formControlName="note"></textarea>
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button
+        *ngIf="!edit_mode"
+        mat-raised-button
+        color="warn"
+        (click)="onClear()"
+      >
+        Clear
+      </button>
+      <button
+        *ngIf="!edit_mode"
+        mat-raised-button
+        color="accent"
+        [mat-dialog-close]="true"
+        [disabled]="!form.valid"
+        (click)="onSubmit()"
+      >
+        Submit
+      </button>
+
+      <button
+        *ngIf="edit_mode"
+        mat-raised-button
+        color="accent"
+        [mat-dialog-close]="true"
+        [disabled]="!form.valid"
+        (click)="onUpdate()"
+      >
+        Update
+      </button>
+    </mat-dialog-actions>
+  </div>
 </ng-template>

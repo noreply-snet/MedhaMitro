@@ -6,18 +6,6 @@ export interface AtmData {
   cvv: number;
 }
 
-export interface BankData {
-  id: number;
-  name: string;
-  bank_name: string;
-  branch_name: string;
-  acc_type: string;
-  acc_number: string;
-  ifsc_code: string;
-  mirc_code: string;
-  note: string;
-  rmn: string;
-}
 
 export interface NoteDataInt {
   name: string;

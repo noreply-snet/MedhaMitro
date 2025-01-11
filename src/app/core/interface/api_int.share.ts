@@ -15,7 +15,7 @@ export interface AtmDataReUp {
 }
 
 
-export interface BankDataReUp {
+export interface BankData {
   id: number;
   name: string;
   bank_name: string;

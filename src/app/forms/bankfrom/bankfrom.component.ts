@@ -1,7 +1,12 @@
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,7 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { CardNoMaskPipe, PassMaskPipe } from '../../shared/pipes/masking.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-
+import { BankData, BankDataCreate } from '../../core/interface/api_int.share';
+import { BankApiService } from '../../shared/services/apis/bank-api.service';
 
 @Component({
   selector: 'app-bankfrom',
@@ -27,34 +33,66 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
-    
-
   ],
   templateUrl: './bankfrom.component.html',
-  styleUrl: './bankfrom.component.css'
+  styleUrl: './bankfrom.component.css',
 })
 export class BankfromComponent {
+  title: string = 'Add Bank Details';
 
-  title: string = "Add Bank Details"
+  clickedIcons: boolean[] = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
+
   edit_mode: boolean = false;
-  clickedIcons: boolean[] = [false, false, false, false, false, false, false, false, false,false];
   status: boolean[] = [true, true];
+  acc_types: string[] = ['Saving', 'Current'];
 
-  acc_type: string[] = ['Saving', 'Current'];
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public dialogData: any,
+    private bankApi: BankApiService
+  ) {
     this.form = this.fb.group({
-      b_name: ['', Validators.required],
-      acc_type: ['', Validators.required],
+      id: '',
+      bank_name: ['', Validators.required],
+      branch_name: ['', Validators.required],
       name: ['', Validators.required],
-      acc_num: ['', Validators.required],
-      ifsc: ['', Validators.required],
+      acc_type: ['', Validators.required],
+      acc_number: ['', Validators.required],
+      ifsc_code: ['', Validators.required],
+      mirc_code: [''],
       rmn: ['', Validators.required],
-      mirc: [''],
-      notes: ['']
-      // Other form controls
+      note: [''],
     });
+  }
+  ngOnInit(): void {
+    if (this.dialogData.type === 'View') {
+      this.title = 'View Bank Details';
+      this.form.patchValue({
+        id: this.dialogData.id,
+        bank_name: this.dialogData.bank_name,
+        branch_name: this.dialogData.branch_name,
+        name: this.dialogData.name,
+        acc_type: this.dialogData.acc_type,
+        acc_number: this.dialogData.acc_number,
+        ifsc_code: this.dialogData.ifsc_code,
+        mirc_code: this.dialogData.mirc_code,
+        rmn: this.dialogData.rmn,
+        note: this.dialogData.note,
+      });
+    }
   }
 
   onClear() {
@@ -63,45 +101,59 @@ export class BankfromComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      // Form is valid, handle the submission
-      // console.log('Form submitted:', this.form.value);
+      const newBank: BankDataCreate = this.bankSerialize(this.form.value);
+      this.bankApi.bankCreate(newBank);
     } else {
-      // Form is invalid, display error messages or take appropriate action
-      // console.log('Form is invalid');
+      console.error('Form is invalid');
     }
+  }
+
+  bankSerialize(value: any): BankDataCreate {
+    return {
+      bank_name: value.bank_name,
+      branch_name: value.branch_name,
+      name: value.name,
+      acc_type: value.acc_type,
+      acc_number: String(value.acc_number),
+      ifsc_code: value.ifsc_code,
+      mirc_code: value.mirc_code,
+      rmn: String(value.rmn),
+      note: value.note,
+    };
   }
 
   onUpdate() {
     if (this.form.valid) {
-      // Form is valid, handle the submission
-      // console.log('Form Updated:', this.form.value);
+      const updatedBank: BankData = this.bankUpdateSerialize(
+        this.form.value
+      );
+      this.bankApi.bankUpdate(updatedBank);
     } else {
-      // Form is invalid, display error messages or take appropriate action
-      // console.log('Form is invalid');
+      console.error('Form is invalid');
     }
   }
 
-  onDelete(id: string) {
-    // console.log(id);
+  bankUpdateSerialize(value: any): BankData {
+    return {
+      id: value.id,
+      bank_name: value.bank_name,
+      branch_name: value.branch_name,
+      name: value.name,
+      acc_type: value.acc_type,
+      acc_number: String(value.acc_number),
+      ifsc_code: value.ifsc_code,
+      mirc_code: value.mirc_code,
+      rmn: value.rmn,
+      note: value.note,
+    };
   }
 
-
-  ngOnInit(): void {
-    if (this.data.type === 'View') {
-      this.title='View Bank Details';
-      this.form = this.fb.group({
-        id:[this.data.bid],
-        b_name: [this.data.bname],
-        acc_type: [this.data.acc_typ],
-        name: [this.data.name],
-        acc_num: [this.data.acc_num],
-        ifsc: [this.data.ifsc],
-        rmn: [this.data.rmn],
-        mirc: [this.data.mirc],
-        notes: [this.data.note]
-      });
+  onDelete(id: number): void {
+    if (id) {
+      this.bankApi.bankDelete(id);
+    } else {
+      console.error('Invalid ID');
     }
-    // console.log(this.data);
   }
-
+  
 }

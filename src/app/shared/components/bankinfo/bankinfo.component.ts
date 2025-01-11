@@ -1,11 +1,11 @@
 import { Component, input } from '@angular/core';
-import { BankData } from '../../../core/interface/interfaces.share';
 import { BankfromComponent } from '../../../forms/bankfrom/bankfrom.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MaskingPipe } from '../../pipes/masking.pipe';
 import { MatButtonModule } from '@angular/material/button';
+import { BankData } from '../../../core/interface/api_int.share';
 
 @Component({
   selector: 'app-bankinfo',
@@ -19,17 +19,18 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './bankinfo.component.css'
 })
 export class BankinfoComponent {
-  dataObj = input<BankData>({        
-    "acc_number": "0",
-    "acc_type": "N/A",
-    "bank_name": "N/A",
-    "branch_name": "N/A",
-    "id": 0,
-    "ifsc_code": "N/A",
-    "mirc_code": "N/A",
-    "name": "N/A",
-    "note": "N/A",
-    "rmn": "N/A"});
+  dataObj = input<BankData>({    
+    id: 0,
+    bank_name: "N/A",
+    branch_name: "N/A",
+    name: "N/A",
+    acc_type: "N/A",
+    acc_number: "0",
+    ifsc_code: "N/A",
+    mirc_code: "N/A",
+    rmn: "N/A",
+    note: "N/A",
+  });
 
     constructor(private dialog: MatDialog) {}
 
@@ -49,15 +50,15 @@ export class BankinfoComponent {
       width: '45%',
       data: {
         type: 'View',
-        bid: id,
+        id: id,
+        bank_name: bname,
+        branch_name: brname,
         name: name,
+        acc_type: acc_typ,
+        acc_number: acc_num,
+        ifsc_code: ifsc,
+        mirc_code: mirc,
         rmn: rmn,
-        bname: bname,
-        brname: brname,
-        acc_typ: acc_typ,
-        acc_num: acc_num,
-        ifsc: ifsc,
-        mirc: mirc,
         note: note,
       },
     });

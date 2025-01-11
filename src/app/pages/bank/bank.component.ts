@@ -1,16 +1,16 @@
-
-import { Component, input, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DatashareService } from '../../shared/services/shared/datashare.service';
-import { BankData } from '../../core/interface/interfaces.share';
 import { MatIconModule } from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
 import { BankfromComponent } from '../../forms/bankfrom/bankfrom.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BankPipe } from '../../shared/pipes/bank.pipe';
-import { bankDataSet } from '../../data/bankData';
 import { BankinfoComponent } from '../../shared/components/bankinfo/bankinfo.component';
+import { BankData } from '../../core/interface/api_int.share';
+import { Subscription } from 'rxjs';
+import { BankSharedService } from '../../shared/services/shared/bank-shared.service';
+import { BankApiService } from '../../shared/services/apis/bank-api.service';
 @Component({
   selector: 'app-bank',
   imports: [
@@ -19,34 +19,45 @@ import { BankinfoComponent } from '../../shared/components/bankinfo/bankinfo.com
     MatTooltipModule,
     BankPipe,
     BankinfoComponent,
-],
+  ],
   templateUrl: './bank.component.html',
   styleUrl: './bank.component.css',
 })
 export class BankComponent {
-
-  dataChild: BankData[] = bankDataSet;
+  dataChild: BankData[] = [];
   filter: string = '';
-  ddf: any;
+
+  v1: Subscription = new Subscription();
+  v2: Subscription = new Subscription();
+
+  constructor(
+    private filterShare: DatashareService,
+    private dialog: MatDialog,
+    private bankData: BankSharedService,
+    private bankApi: BankApiService
+  ) {}
 
   openFromDialog(): void {
-    const dialogRef = this.dialog.open(BankfromComponent, {
+    this.dialog.open(BankfromComponent, {
       width: '50%',
       data: { type: 'Form' },
     });
   }
 
-  constructor(private dataShare: DatashareService, private dialog: MatDialog) {}
-
   ngOnInit(): void {
-
-    this.ddf = this.dataShare.data$.subscribe((data) => {
+    this.v1 = this.filterShare.data$.subscribe((data) => {
       this.filter = data;
     });
-    // console.log(this.dataChild);
+
+    this.v2 = this.bankData.banksData$.subscribe((data) => {
+      this.dataChild = data;
+    });
+
+    this.bankApi.fetchAllBanks();
   }
 
   ngOnDestroy(): void {
-    this.ddf.unsubscribe();
+    this.v1.unsubscribe();
+    this.v2.unsubscribe();
   }
 }

@@ -25,6 +25,7 @@ import { AtmSharedService } from '../../shared/services/shared/atm-shared.servic
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.css',
 })
+
 export class CardsComponent implements OnInit, OnDestroy {
   atmsData: AtmDataReUp[] = [];
 
@@ -40,7 +41,7 @@ export class CardsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.atmDataShear.atmsData$.subscribe((data: AtmDataReUp[]) => {
+    this.ddf = this.atmDataShear.atmsData$.subscribe((data: AtmDataReUp[]) => {
       this.atmsData = data;
     });
 

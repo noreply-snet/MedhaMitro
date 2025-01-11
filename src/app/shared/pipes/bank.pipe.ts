@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { BankData } from '../../core/interface/interfaces.share';
+import { BankData } from '../../core/interface/api_int.share';
 
 @Pipe({
   name: 'bank'
