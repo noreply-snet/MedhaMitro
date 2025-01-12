@@ -1,138 +1,223 @@
-<ng-container *ngIf="data.type=='Form'">
-    <ng-container *ngTemplateOutlet="fromTemp"></ng-container>
+<ng-container *ngIf="data.type == 'Form'">
+  <ng-container *ngTemplateOutlet="fromTemp"></ng-container>
 </ng-container>
 
-<ng-container *ngIf="data.type=='View'">
-    <ng-container *ngTemplateOutlet="viewTemp"></ng-container>
+<ng-container *ngIf="data.type == 'View'">
+  <ng-container *ngTemplateOutlet="viewTemp"></ng-container>
 </ng-container>
 
 <ng-template #viewTemp>
-    <div class="container">
-        <div mat-dialog-title class="header">
-            <h2>{{title}}</h2>
-            <button [mat-dialog-close]="true" mat-mini-fab color="primary" aria-label="dialog close button">
-                <mat-icon>add</mat-icon>
-            </button>
-        </div>
-
-        <mat-dialog-content class="mat-typography">
-            <div class="action">
-                <button mat-raised-button color="primary"
-                    (click)="edit_mode=true;title='Edit Note Details';data.type='Form'">Edit</button>
-                <button mat-raised-button color="accent" [ngClass]="{ 'copied': clickedIcons[0]}"
-                    [cdkCopyToClipboard]="'Title: '+data.tit+'\n'+'Subtitle: '+data.tag+'\n'+'Note: '+data.note"
-                    aria-label="dialog content copy button">
-                    Copy All
-                </button>
-            </div>
-
-            <div class="cont">
-                <table>
-                  <tr>
-                    <td class="cf cf1">
-                      <h3>Title:</h3>
-                    </td>
-                    <td class="icon ic1">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[1] }"
-                        (click)="clickedIcons[1]=!clickedIcons[1]"
-                        [cdkCopyToClipboard]="data.tit"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td class="cd cd1">
-                      <span>{{data.tit}}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cf cf2">
-                      <h3>Subtitle:</h3>
-                    </td>
-                    <td class="icon ic2">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[2] }"
-                        (click)="clickedIcons[2]=!clickedIcons[2]"
-                        [cdkCopyToClipboard]="data.tag"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td class="cd cd2">
-                      <span>{{data.tag}}</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cf cf3">
-                      <h3>Note:</h3>
-                    </td>
-                    <td class="icon ic3">
-                      <mat-icon
-                        color="primary"
-                        [ngClass]="{ 'clicked': clickedIcons[3] }"
-                        (click)="clickedIcons[3]=!clickedIcons[3]"
-                        [cdkCopyToClipboard]="data.note"
-                        fontIcon="content_copy"
-                      ></mat-icon>
-                    </td>
-                    <td class="cd cd3">
-                      <span>{{data.note}}</span>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              
-        </mat-dialog-content>
-
-        <mat-divider></mat-divider>
-
-        <mat-dialog-actions align="center">
-            <button mat-raised-button color="warn" [mat-dialog-close]="true"
-                [disabled]="!form.valid" (click)="onDelete(data.tit)">Delete This Data</button>
-        </mat-dialog-actions>
-
+  <div class="container">
+    <div mat-dialog-title class="header">
+      <h2>{{ title }}</h2>
+      <button
+        [mat-dialog-close]="true"
+        mat-mini-fab
+        color="primary"
+        aria-label="dialog close button"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
+
+    <mat-dialog-content class="mat-typography">
+      <div class="action">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="
+            edit_mode = true; title = 'Edit Note Details'; data.type = 'Form'
+          "
+        >
+          Edit
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          [ngClass]="{ copied: clickedIcons[0] }"
+          [cdkCopyToClipboard]="
+            'Title: ' +
+            data.tit +
+            '\n' +
+            'Subtitle: ' +
+            data.tag +
+            '\n' +
+            'Note: ' +
+            data.note
+          "
+          aria-label="dialog content copy button"
+        >
+          Copy All
+        </button>
+      </div>
+
+      <div class="cont">
+        <table>
+          <tr>
+            <td class="cf cf1">
+              <h3>Title:</h3>
+            </td>
+            <td class="icon ic1">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[1] }"
+                (click)="clickedIcons[1] = !clickedIcons[1]"
+                [cdkCopyToClipboard]="data.tit"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td class="cd cd1">
+              <span>{{ data.tit }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="cf cf2">
+              <h3>Subtitle:</h3>
+            </td>
+            <td class="icon ic2">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[2] }"
+                (click)="clickedIcons[2] = !clickedIcons[2]"
+                [cdkCopyToClipboard]="data.tag"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td class="cd cd2">
+              <span>{{ data.tag }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="cf cf3">
+              <h3>Note:</h3>
+            </td>
+            <td class="icon ic3">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[3] }"
+                (click)="clickedIcons[3] = !clickedIcons[3]"
+                [cdkCopyToClipboard]="data.note"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
+            <td class="cd cd3">
+              <span>{{ data.note }}</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </mat-dialog-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-dialog-actions align="center">
+      <button
+        mat-raised-button
+        color="warn"
+        [mat-dialog-close]="true"
+        [disabled]="!form.valid"
+        (click)="onDelete(data.tit)"
+      >
+        Delete This Data
+      </button>
+    </mat-dialog-actions>
+  </div>
 </ng-template>
 
-
-
 <ng-template #fromTemp>
-    <div class="main">
-        <div mat-dialog-title class="header">
-            <h2>{{title}}</h2>
-            <button [mat-dialog-close]="true" mat-mini-fab color="primary" aria-label="dialog close button">
-                <mat-icon>add</mat-icon>
-            </button>
-        </div>
-
-        <mat-dialog-content class="mat-typography">
-            <form class="form" [formGroup]="form">
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="title">Title</mat-label>
-                    <input matInput formControlName="title">
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="tag">Sub Title</mat-label>
-                    <input matInput formControlName="tag">
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label for="notes">Note</mat-label>
-                    <textarea matInput formControlName="notes"></textarea>
-                </mat-form-field>
-
-            </form>
-        </mat-dialog-content>
-
-        <mat-dialog-actions align="end">
-            <button *ngIf="!edit_mode" mat-raised-button color="warn" (click)="onClear()">Clear</button>
-            <button *ngIf="!edit_mode" mat-raised-button color="primary" [mat-dialog-close]="true" [disabled]="!form.valid"
-                (click)="onSubmit()">Submit</button>
-
-            <button *ngIf="edit_mode" mat-raised-button color="accent" [mat-dialog-close]="true" [disabled]="!form.valid"
-                (click)="onUpdate()">Update</button>
-        </mat-dialog-actions>
+  <div class="main">
+    <div mat-dialog-title class="header">
+      <h2>{{ title }}</h2>
+      <button
+        [mat-dialog-close]="true"
+        mat-mini-fab
+        color="primary"
+        aria-label="dialog close button"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
+
+    <mat-dialog-content class="mat-typography">
+      <form class="form" [formGroup]="form">
+        <!-- Title Input -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" placeholder="Enter title" />
+        </mat-form-field>
+
+        <!-- Tags with mat-chips -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Tags</mat-label>
+          <mat-chip-listbox #chipList aria-label="tag selection">
+            <mat-chip-option
+              *ngFor="let tag of form.value.tags"
+              [removable]="true"
+              (removed)="removeTag(tag)"
+            >
+              {{ tag }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-option>
+
+            <input
+              matInput
+              placeholder="Add a tag"
+              [formControlName]="'tagInput'"
+              [matChipInputFor]="chipOptions"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="true"
+              (matChipInputTokenEnd)="addTag($event)"
+            />
+            <mat-error *ngIf="duplicateTagError">
+              Tag already exists!
+            </mat-error>
+          </mat-chip-listbox>
+        </mat-form-field>
+
+        <!-- Notes Input -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Note</mat-label>
+          <textarea
+            matInput
+            formControlName="para"
+            placeholder="Write your note here"
+          ></textarea>
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button
+        *ngIf="!edit_mode"
+        mat-raised-button
+        color="warn"
+        (click)="onClear()"
+      >
+        Clear
+      </button>
+      <button
+        *ngIf="!edit_mode"
+        mat-raised-button
+        color="primary"
+        [mat-dialog-close]="true"
+        [disabled]="!form.valid"
+        (click)="onSubmit()"
+      >
+        Submit
+      </button>
+
+      <button
+        *ngIf="edit_mode"
+        mat-raised-button
+        color="accent"
+        [mat-dialog-close]="true"
+        [disabled]="!form.valid"
+        (click)="onUpdate()"
+      >
+        Update
+      </button>
+    </mat-dialog-actions>
+  </div>
 </ng-template>

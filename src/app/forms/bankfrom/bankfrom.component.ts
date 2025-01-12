@@ -52,7 +52,6 @@ export class BankfromComponent {
     false,
     false,
   ];
-
   edit_mode: boolean = false;
   status: boolean[] = [true, true];
   acc_types: string[] = ['Saving', 'Current'];

@@ -16,17 +16,17 @@ export class NotesComponent {
 
   data: NoteDataInt[] = noteDataSet; 
 
-  protected colors = ['red', 'green', 'blue', 'yellow', 'violet', 'orange'];
-  protected lastcolor = 'yellow';
+  // protected colors = ['red', 'green', 'blue', 'yellow', 'violet', 'orange'];
+  // protected lastcolor = 'yellow';
 
-  setRandomColor(colorss:string[], lastcolor:string) {
-    var dd = colorss.indexOf(lastcolor);
-    var array = colorss.splice(dd, 1);
-    const index = Math.floor(Math.random() * colorss.length);
-    var color = Array.from(colorss)[index];
-    colorss.push(array[0]);
-    console.log(color);
-  }
+  // setRandomColor(colors:string[], lastcolor:string) {
+  //   var dd = colors.indexOf(lastcolor);
+  //   var array = colors.splice(dd, 1);
+  //   const index = Math.floor(Math.random() * colors.length);
+  //   var color = Array.from(colors)[index];
+  //   colors.push(array[0]);
+  //   console.log(color);
+  // }
 
 
   ngOnInit(): void {

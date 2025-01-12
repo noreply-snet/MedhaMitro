@@ -41,7 +41,7 @@ export interface BankDataCreate {
 }
 
 
-export interface NoteDataReUp {
+export interface NoteData {
   id: number;
   title: string;
   tags: [string]; //string;
