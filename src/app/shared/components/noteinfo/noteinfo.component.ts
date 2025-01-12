@@ -39,6 +39,8 @@ export class NoteinfoComponent {
     orange: '--primary-card:#e99900;     --background-card:#ffa5008a;',
   };
 
+  constructor(private dataShare: DatashareService, private dialog: MatDialog) {}
+
   ngOnInit(): void {
     this.subs = this.dataShare.data$.subscribe((data) => {
       this.filter = data;
@@ -46,21 +48,17 @@ export class NoteinfoComponent {
     });
   }
 
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
+
+
+  
   onclick() {
     console.log('Working');
     // this.setRandomColor(this.colors,this.lastcolor);
   }
 
-  applyColor(color: string) {
-    return this.colorsbord[color];
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(NotefromComponent, {
-      width: '50%',
-      data: { type: 'Form' },
-    });
-  }
 
   openViewDialog(title: string, subt: string, note: string): void {
     const dialogRef = this.dialog.open(NotefromComponent, {
@@ -69,9 +67,8 @@ export class NoteinfoComponent {
     });
   }
 
-  constructor(private dataShare: DatashareService, private dialog: MatDialog) {}
-
-  ngOnDestroy() {
-    this.subs.unsubscribe();
+  applyColor(color: string) {
+    return this.colorsbord[color];
   }
+
 }

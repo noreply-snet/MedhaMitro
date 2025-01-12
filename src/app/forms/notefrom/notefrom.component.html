@@ -149,8 +149,8 @@
         <!-- Tags with mat-chips -->
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Tags</mat-label>
-          <mat-chip-listbox #chipList aria-label="tag selection">
-            <mat-chip-option
+          <mat-chip-grid #chipOptions aria-label="tag selection">
+            <mat-chip-row
               *ngFor="let tag of form.value.tags"
               [removable]="true"
               (removed)="removeTag(tag)"
@@ -159,7 +159,7 @@
               <button matChipRemove>
                 <mat-icon>cancel</mat-icon>
               </button>
-            </mat-chip-option>
+            </mat-chip-row>
 
             <input
               matInput
@@ -173,7 +173,7 @@
             <mat-error *ngIf="duplicateTagError">
               Tag already exists!
             </mat-error>
-          </mat-chip-listbox>
+          </mat-chip-grid>
         </mat-form-field>
 
         <!-- Notes Input -->

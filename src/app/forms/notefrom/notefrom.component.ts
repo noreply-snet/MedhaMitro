@@ -1,7 +1,7 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -14,7 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import {MatChipGrid, MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 
 @Component({
   selector: 'app-notefrom',
@@ -50,8 +50,6 @@ export class NotefromComponent {
 
   form: FormGroup;
 
-  @ViewChild('chipList', { static: true }) chipOptions!: MatChipGrid;
-
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -80,20 +78,20 @@ export class NotefromComponent {
   onSubmit() {
     if (this.form.valid) {
       // Form is valid, handle the submission
-      // console.log('Form submitted:', this.form.value);
+      console.log('Form submitted:', this.form.value);
     } else {
       // Form is invalid, display error messages or take appropriate action
-      // console.log('Form is invalid');
+      console.log('Form is invalid');
     }
   }
 
   onUpdate() {
     if (this.form.valid) {
       // Form is valid, handle the submission
-      // console.log('Form Updated:', this.form.value);
+      console.log('Form Updated:', this.form.value);
     } else {
       // Form is invalid, display error messages or take appropriate action
-      // console.log('Form is invalid');
+      console.log('Form is invalid');
     }
   }
 

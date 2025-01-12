@@ -3,11 +3,6 @@
     --background-card: #5858588a;
 }
 
-.container {
-    height: calc(100vh - 85px);
-    overflow-y: scroll;
-    padding: 1rem 0 0 2rem;
-}
 
 .main {
     height: auto;
@@ -58,30 +53,4 @@ button:hover {
 
 #btn1 {
     background-color: var(--background-card);
-}
-
-.footer {
-    content: "";
-    width: 100%;
-    height: 70px;
-}
-
-.add-data {
-    position: absolute;
-    bottom: 2%;
-    right: 2% ;
-}
-.add-data>button {
-    background-color: #673ab7;
-    color: white;
-}
-
-.add-data>button>mat-icon {
-    transform: scale(1.3);
-    
-}
-
-.add-data>button:hover >  mat-icon  {
-    transition: transform ease-in .3s;
-    transform: rotateZ(180deg) scale(1.3);
 }
