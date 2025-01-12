@@ -39,23 +39,23 @@
           color="accent"
           [ngClass]="{ copied: clickedIcons[0] }"
           [cdkCopyToClipboard]="
-            'Name: ' +
-            data.name +
+            'Account Name: ' +
+            data.acc_name +
             '\n' +
             'URL: ' +
             data.url +
             '\n' +
-            'Username: ' +
-            data.username +
-            '\n' +
-            'LogIn ID: ' +
+            'Login ID: ' +
             data.loginid +
             '\n' +
             'Password: ' +
-            data.pass +
+            data.password +
             '\n' +
-            'Note: ' +
-            data.note
+            'Associated Email: ' +
+            data.ass_email +
+            '\n' +
+            'Notes: ' +
+            data.notes
           "
           aria-label="dialog content copy button"
         >
@@ -67,20 +67,19 @@
         <table>
           <tr>
             <td class="cf cf1">
-              <h3>Name:</h3>
+              <h3>Account Name:</h3>
             </td>
             <td class="icon ic1">
               <mat-icon
                 color="primary"
                 [ngClass]="{ clicked: clickedIcons[1] }"
                 (click)="clickedIcons[1] = !clickedIcons[1]"
-                [cdkCopyToClipboard]="data.tit"
+                [cdkCopyToClipboard]="data.acc_name"
                 fontIcon="content_copy"
               ></mat-icon>
             </td>
-            <td></td>
             <td class="cd cd1">
-              <span>{{ data.name }}</span>
+              <span>{{ data.acc_name }}</span>
             </td>
           </tr>
           <tr>
@@ -92,61 +91,41 @@
                 color="primary"
                 [ngClass]="{ clicked: clickedIcons[2] }"
                 (click)="clickedIcons[2] = !clickedIcons[2]"
-                [cdkCopyToClipboard]="data.tit"
+                [cdkCopyToClipboard]="data.url"
                 fontIcon="content_copy"
               ></mat-icon>
             </td>
-            <td></td>
             <td class="cd cd2">
               <span>{{ data.url }}</span>
             </td>
           </tr>
           <tr>
             <td class="cf cf3">
-              <h3>Username:</h3>
+              <h3>Login ID:</h3>
             </td>
             <td class="icon ic3">
               <mat-icon
                 color="primary"
                 [ngClass]="{ clicked: clickedIcons[3] }"
                 (click)="clickedIcons[3] = !clickedIcons[3]"
-                [cdkCopyToClipboard]="data.tit"
+                [cdkCopyToClipboard]="data.loginid"
                 fontIcon="content_copy"
               ></mat-icon>
             </td>
-            <td></td>
             <td class="cd cd3">
-              <span>{{ data.username }}</span>
+              <span>{{ data.loginid }}</span>
             </td>
           </tr>
           <tr>
             <td class="cf cf4">
-              <h3>LogIn ID:</h3>
+              <h3>Password:</h3>
             </td>
             <td class="icon ic4">
               <mat-icon
                 color="primary"
                 [ngClass]="{ clicked: clickedIcons[4] }"
                 (click)="clickedIcons[4] = !clickedIcons[4]"
-                [cdkCopyToClipboard]="data.tit"
-                fontIcon="content_copy"
-              ></mat-icon>
-            </td>
-            <td></td>
-            <td class="cd cd4">
-              <span>{{ data.loginid }}</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="cf cf5">
-              <h3>Password:</h3>
-            </td>
-            <td class="icon ic5">
-              <mat-icon
-                color="primary"
-                [ngClass]="{ clicked: clickedIcons[5] }"
-                (click)="clickedIcons[5] = !clickedIcons[5]"
-                [cdkCopyToClipboard]="data.tit"
+                [cdkCopyToClipboard]="data.password"
                 fontIcon="content_copy"
               ></mat-icon>
             </td>
@@ -158,35 +137,51 @@
                 [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="status"
               >
-                <mat-icon>{{ status ? "visibility_off" : "visibility" }}</mat-icon>
+                <mat-icon>{{
+                  status ? "visibility_off" : "visibility"
+                }}</mat-icon>
               </button>
             </td>
+            <td class="cd cd4">
+              <span>{{ data.password | passMask : status }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="cf cf5">
+              <h3>Associated Email:</h3>
+            </td>
+            <td class="icon ic5">
+              <mat-icon
+                color="primary"
+                [ngClass]="{ clicked: clickedIcons[5] }"
+                (click)="clickedIcons[5] = !clickedIcons[5]"
+                [cdkCopyToClipboard]="data.ass_email"
+                fontIcon="content_copy"
+              ></mat-icon>
+            </td>
             <td class="cd cd5">
-              <span>{{ data.pass | passMask : status }}</span>
+              <span>{{ data.ass_email }}</span>
             </td>
           </tr>
           <tr>
             <td class="cf cf6">
-              <h3>Note:</h3>
+              <h3>Notes:</h3>
             </td>
             <td class="icon ic6">
               <mat-icon
                 color="primary"
                 [ngClass]="{ clicked: clickedIcons[6] }"
                 (click)="clickedIcons[6] = !clickedIcons[6]"
-                [cdkCopyToClipboard]="data.tit"
+                [cdkCopyToClipboard]="data.notes"
                 fontIcon="content_copy"
               ></mat-icon>
             </td>
-            <td></td>
             <td class="cd cd6">
-              <span>{{ data.note }}</span>
+              <span>{{ data.notes }}</span>
             </td>
           </tr>
         </table>
       </div>
-      
-      
     </mat-dialog-content>
 
     <mat-divider></mat-divider>
@@ -196,7 +191,6 @@
         mat-raised-button
         color="warn"
         [mat-dialog-close]="true"
-        [disabled]="!form.valid"
         (click)="onDelete(data.id)"
       >
         Delete This Data
@@ -225,7 +219,7 @@
           <mat-label for="url">URL</mat-label>
           <input matInput formControlName="url" />
           <mat-error
-            *ngIf=" isUrlInvalid() && !form.get('url')?.errors?.['required'] "
+            *ngIf="isUrlInvalid() && !form.get('url')?.errors?.['required']"
             >Invalid URL</mat-error
           >
           <mat-error *ngIf="form.get('url')?.errors?.['required']"
@@ -234,13 +228,8 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label for="name">Name</mat-label>
-          <input matInput formControlName="name" />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label for="username">Username</mat-label>
-          <input matInput formControlName="username" />
+          <mat-label for="acc_name">Account Name</mat-label>
+          <input matInput formControlName="acc_name" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -249,7 +238,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Enter your password</mat-label>
+          <mat-label>Password</mat-label>
           <input
             formControlName="password"
             matInput
@@ -264,6 +253,11 @@
           >
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label for="ass_email">Associated Email</mat-label>
+          <input matInput formControlName="ass_email" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -302,7 +296,7 @@
         (click)="onUpdate()"
       >
         Update
-      </button>
+        </button>
     </mat-dialog-actions>
   </div>
 </ng-template>

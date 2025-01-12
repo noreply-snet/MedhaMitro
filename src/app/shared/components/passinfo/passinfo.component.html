@@ -1,4 +1,3 @@
-
 <div class="mat-elevation-z8 cover">
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Global Filter</mat-label>
@@ -15,59 +14,58 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
         <td mat-cell *matCellDef="let element">{{ element.id }}</td>
       </ng-container>
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+
+      <!-- Account Name Column -->
+      <ng-container matColumnDef="acc_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Account Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.acc_name }}</td>
       </ng-container>
-  
+
       <!-- URL Column -->
       <ng-container matColumnDef="url">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>URL</th>
         <td mat-cell *matCellDef="let element">{{ element.url }}</td>
       </ng-container>
-  
+
+      <!-- Login ID Column -->
+      <ng-container matColumnDef="loginid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Login ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.loginid }}</td>
+      </ng-container>
+
       <!-- Password Column -->
       <ng-container matColumnDef="password">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Password</th>
         <td mat-cell *matCellDef="let element">{{ element.password }}</td>
       </ng-container>
-  
-      <!-- Username Column -->
-      <ng-container matColumnDef="username">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
-        <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+
+      <!-- Associated Email Column -->
+      <ng-container matColumnDef="ass_email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Associated Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.ass_email }}</td>
       </ng-container>
-  
+
       <!-- Notes Column -->
       <ng-container matColumnDef="notes">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Notes</th>
         <td mat-cell *matCellDef="let element">{{ element.notes }}</td>
       </ng-container>
-  
-      <!-- Last Seen Column -->
-      <ng-container matColumnDef="last_seen">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Seen</th>
-        <td mat-cell *matCellDef="let element">{{ element.last_seen }}</td>
-      </ng-container>
-  
-      <!-- Login ID Column -->
+
+      <!-- Action Column -->
       <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+        <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
-          <button mat-flat-button  (click)="openViewDialog(element.id,element.name,element.url,element.username,element.loginid,element.password,element.notes)">
+          <button mat-flat-button (click)="openViewDialog(element.id, element.acc_name, element.url, element.loginid, element.password, element.ass_email, element.notes)">
             View
           </button>
         </td>
       </ng-container>
-  
+
       <!-- Table Header and Rows -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
-
 
   <mat-paginator
     [pageSizeOptions]="[5, 10, 25, 100]"
@@ -75,16 +73,16 @@
   ></mat-paginator>
 </div>
 
-  <!-- Footer -->
-  <div class="footer">
-    <div class="add-data">
-      <button
-        mat-fab
-        matTooltip="Add New"
-        (click)="openFormDialog()"
-        aria-label="openDialog button"
-      >
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
+<!-- Footer -->
+<div class="footer">
+  <div class="add-data">
+    <button
+      mat-fab
+      matTooltip="Add New"
+      (click)="openFormDialog()"
+      aria-label="openDialog button"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
+</div>
