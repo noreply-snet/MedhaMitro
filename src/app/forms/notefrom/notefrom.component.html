@@ -144,8 +144,11 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Title</mat-label>
           <input matInput formControlName="title" placeholder="Enter title" />
+          <mat-error *ngIf="form.get('title')?.hasError('required')">
+            Title is required.
+          </mat-error>
         </mat-form-field>
-
+    
         <!-- Tags with mat-chips -->
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Tags</mat-label>
@@ -160,7 +163,7 @@
                 <mat-icon>cancel</mat-icon>
               </button>
             </mat-chip-row>
-
+    
             <input
               matInput
               placeholder="Add a tag"
@@ -169,13 +172,14 @@
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               [matChipInputAddOnBlur]="true"
               (matChipInputTokenEnd)="addTag($event)"
+              (keyup)="checkDuplicateTag($event)"
             />
             <mat-error *ngIf="duplicateTagError">
               Tag already exists!
             </mat-error>
           </mat-chip-grid>
         </mat-form-field>
-
+    
         <!-- Notes Input -->
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Note</mat-label>
@@ -184,9 +188,13 @@
             formControlName="para"
             placeholder="Write your note here"
           ></textarea>
+          <mat-error *ngIf="form.get('para')?.hasError('required')">
+            Note is required.
+          </mat-error>
         </mat-form-field>
       </form>
     </mat-dialog-content>
+    
 
     <mat-dialog-actions align="end">
       <button

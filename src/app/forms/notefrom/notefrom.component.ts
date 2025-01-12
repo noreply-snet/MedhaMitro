@@ -1,7 +1,7 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -14,7 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-notefrom',
@@ -29,9 +29,6 @@ import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
     MatButtonModule,
     MatInputModule,
     MatChipsModule,
-
-
-
   ],
   templateUrl: './notefrom.component.html',
   styleUrl: './notefrom.component.css',
@@ -109,11 +106,8 @@ export class NotefromComponent {
     const value = event.value.trim();
 
     if (value) {
-      if (this.tags.includes(value)) {
-        this.duplicateTagError = true; // Show error for duplicate tag
-      } else {
+      if (!this.tags.includes(value)) {
         this.tags.push(value);
-        this.duplicateTagError = false; // Reset error if tag is valid
         this.form.get('tags')?.setValue(this.tags); // Update form control
         this.form.get('tagInput')?.setValue('');
       }
@@ -134,4 +128,14 @@ export class NotefromComponent {
     }
   }
 
+  // Check for duplicate tag during input
+  checkDuplicateTag(event: KeyboardEvent): void {
+    const input = (event.target as HTMLInputElement).value.trim();
+
+    if (this.tags.includes(input)) {
+      this.duplicateTagError = true; // Set error if duplicate exists
+    } else {
+      this.duplicateTagError = false; // Reset error if input is unique
+    }
+  }
 }
