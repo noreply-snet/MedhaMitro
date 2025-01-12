@@ -72,7 +72,7 @@
           </tr>
           <tr>
             <td class="cf cf2">
-              <h3>Subtitle:</h3>
+              <h3>Tags:</h3>
             </td>
             <td class="icon ic2">
               <mat-icon
@@ -116,7 +116,7 @@
         color="warn"
         [mat-dialog-close]="true"
         [disabled]="!form.valid"
-        (click)="onDelete(data.tit)"
+        (click)="onDelete(data.id)"
       >
         Delete This Data
       </button>
@@ -185,13 +185,26 @@
           <mat-label>Note</mat-label>
           <textarea
             matInput
-            formControlName="para"
+            formControlName="massage"
             placeholder="Write your note here"
           ></textarea>
-          <mat-error *ngIf="form.get('para')?.hasError('required')">
+          <mat-error *ngIf="form.get('massage')?.hasError('required')">
             Note is required.
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field appearance="outline" >
+          <mat-label>Note Color</mat-label>
+          <mat-select [(value)]="form.value.color" formControlName="color">
+            @for (color of colorArray; track color) {
+              <mat-option 
+              [value]="color.value"
+              
+              >{{color.viewValue}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
       </form>
     </mat-dialog-content>
     

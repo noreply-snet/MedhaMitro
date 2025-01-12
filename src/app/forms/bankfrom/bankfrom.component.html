@@ -296,7 +296,7 @@
 
         <mat-form-field appearance="outline">
           <mat-label for="acc_type">Account Type</mat-label>
-          <mat-select formControlName="acc_type" id="acc_type">
+          <mat-select [(value)]="form.value.acc_type" formControlName="acc_type" id="acc_type">
             <mat-option *ngFor="let acc of acc_types" [value]="acc">
               {{ acc }}
             </mat-option>

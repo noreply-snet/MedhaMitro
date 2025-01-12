@@ -5,13 +5,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { NotefromComponent } from '../../../forms/notefrom/notefrom.component';
 import {
   ColorInt,
-  NoteDataInt,
 } from '../../../core/interface/interfaces.share';
 import { DatashareService } from '../../services/shared/datashare.service';
 import { NotePipe } from '../../pipes/note.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Subscriber } from 'rxjs';
+import { NoteData } from '../../../core/interface/api_int.share';
+
 
 @Component({
   selector: 'app-noteinfo',
@@ -26,7 +26,13 @@ import { Subscriber } from 'rxjs';
   styleUrl: './noteinfo.component.css',
 })
 export class NoteinfoComponent {
-  dataChild = input<NoteDataInt[]>([]);
+  dataChild = input<NoteData[]>([{
+    id: 0,
+    title: 'N/A',
+    tags: ['N/A'], 
+    massage: 'N/A',
+    color: 'red'
+  }]);
 
   filter: string = '';
   subs: any;
@@ -53,21 +59,17 @@ export class NoteinfoComponent {
   }
 
 
-  
-  onclick() {
-    console.log('Working');
-    // this.setRandomColor(this.colors,this.lastcolor);
-  }
-
-
-  openViewDialog(title: string, subt: string, note: string): void {
-    const dialogRef = this.dialog.open(NotefromComponent, {
+  openViewDialog(id:number,title: string, tags: string[], note: string, color: string): void {
+    this.dialog.open(NotefromComponent, {
       width: '45%',
-      data: { type: 'View', tit: title, tag: subt, note: note },
+      data: { type: 'View', id: id, tit: title, tag: tags, note: note , color: color},
     });
   }
 
   applyColor(color: string) {
+    if (!color || color=='' || !this.colorsbord.hasOwnProperty(color)) {
+      return this.colorsbord['red'];
+    }
     return this.colorsbord[color];
   }
 

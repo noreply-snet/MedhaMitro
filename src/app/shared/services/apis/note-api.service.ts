@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NoteDataReUp, NoteDataCreate } from '../../../core/interface/api_int.share';
+import { NoteData, NoteDataCreate } from '../../../core/interface/api_int.share';
+import { NoteSharedService } from '../shared/note-shared.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +11,23 @@ export class NoteApiService {
 
   private apiUrl = 'http://127.0.0.1:8000/note'; // Replace with your backend endpoint
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private noteDS: NoteSharedService) {}
 
   // API Requests
-  getAllNotes(): Observable<NoteDataReUp[]> {
-    return this.http.get<NoteDataReUp[]>(`${this.apiUrl}/all`);
+  getAllNotes(): Observable<NoteData[]> {
+    return this.http.get<NoteData[]>(`${this.apiUrl}/all`);
   }
 
-  createNote(note: NoteDataCreate): Observable<NoteDataReUp> {
-    return this.http.post<NoteDataReUp>(`${this.apiUrl}/`, note);
+  createNote(note: NoteDataCreate): Observable<NoteData> {
+    return this.http.post<NoteData>(`${this.apiUrl}/`, note);
   }
 
-  readNote(noteId: number): Observable<NoteDataReUp> {
-    return this.http.get<NoteDataReUp>(`${this.apiUrl}/${noteId}`);
+  readNote(noteId: number): Observable<NoteData> {
+    return this.http.get<NoteData>(`${this.apiUrl}/${noteId}`);
   }
 
-  updateNote(note: NoteDataReUp): Observable<NoteDataReUp> {
-    return this.http.put<NoteDataReUp>(`${this.apiUrl}/`, note);
+  updateNote(note: NoteData): Observable<NoteData> {
+    return this.http.put<NoteData>(`${this.apiUrl}/`, note);
   }
 
   deleteNote(noteId: number): Observable<{ msg: string }> {
@@ -36,7 +37,8 @@ export class NoteApiService {
   // Handling API Request Functions
   fetchAllNotes(): void {
     this.getAllNotes().subscribe({
-      next: (data: NoteDataReUp[]) => {
+      next: (data: NoteData[]) => {
+        this.noteDS.setNotesData(data);
         console.log('Fetched Notes Data:', data);
       },
       error: (error) => {
@@ -47,7 +49,8 @@ export class NoteApiService {
 
   noteCreate(data: NoteDataCreate): void {
     this.createNote(data).subscribe({
-      next: (note: NoteDataReUp) => {
+      next: (note: NoteData) => {
+        this.noteDS.addNote(note);
         console.log('Note Created:', note);
       },
       error: (error) => {
@@ -56,9 +59,10 @@ export class NoteApiService {
     });
   }
 
-  noteUpdate(data: NoteDataReUp): void {
+  noteUpdate(data: NoteData): void {
     this.updateNote(data).subscribe({
-      next: (note: NoteDataReUp) => {
+      next: (note: NoteData) => {
+        this.noteDS.updateNote(note);
         console.log('Note Updated:', note);
       },
       error: (error) => {
@@ -70,6 +74,7 @@ export class NoteApiService {
   noteDelete(id: number): void {
     this.deleteNote(id).subscribe({
       next: (response: { msg: string }) => {
+        this.noteDS.removeNoteById(id);
         console.log('Note Deleted:', response);
       },
       error: (error) => {

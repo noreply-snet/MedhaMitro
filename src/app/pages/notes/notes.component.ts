@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
-import { noteDataSet } from '../../data/noteData';
-import { NoteDataInt } from '../../core/interface/interfaces.share';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NoteinfoComponent } from '../../shared/components/noteinfo/noteinfo.component';
 import { MatIconModule } from '@angular/material/icon';
 import { NotefromComponent } from '../../forms/notefrom/notefrom.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NoteData } from '../../core/interface/api_int.share';
+import { NoteApiService } from '../../shared/services/apis/note-api.service';
+import { NoteSharedService } from '../../shared/services/shared/note-shared.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-notes',
@@ -19,25 +21,25 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.css',
 })
-export class NotesComponent {
-  data: NoteDataInt[] = noteDataSet;
+export class NotesComponent implements OnInit, OnDestroy {
+  data: NoteData[] = [];
 
-  // protected colors = ['red', 'green', 'blue', 'yellow', 'violet', 'orange'];
-  // protected lastcolor = 'yellow';
+  v1: Subscription = new Subscription();
 
-  // setRandomColor(colors:string[], lastcolor:string) {
-  //   var dd = colors.indexOf(lastcolor);
-  //   var array = colors.splice(dd, 1);
-  //   const index = Math.floor(Math.random() * colors.length);
-  //   var color = Array.from(colors)[index];
-  //   colors.push(array[0]);
-  //   console.log(color);
-  // }
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private noteApi: NoteApiService, private noteShare: NoteSharedService) {}
 
   ngOnInit(): void {
-    // console.log(this.data);
+    this.v1 = this.noteShare.notesData$.subscribe((data) => {
+      this.data = data;
+    });
+
+    this.noteApi.fetchAllNotes();
+    
+  }
+
+  ngOnDestroy(): void {
+    this.v1.unsubscribe();
   }
 
   openDialog(): void {

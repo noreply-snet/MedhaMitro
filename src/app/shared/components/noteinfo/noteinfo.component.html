@@ -1,22 +1,23 @@
 
     <div class="main">
-        @for (item of dataChild()|note:filter; track $index) {
-            
+        @for (item of dataChild()|note:filter; track item) {
+
             <div class="cardsx">
                 <mat-card [style]="applyColor(item.color)" class="example-card">
                     <mat-card-header>
-                        <mat-card-title> {{item.name}} </mat-card-title>
-                        <mat-card-subtitle> {{item.username}} </mat-card-subtitle>
+                        <mat-card-title> {{item.title}} </mat-card-title>
+                        <mat-card-subtitle> {{item.tags}} </mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>
                         <p class="my-paragraph">
-                            {{item.para}}
+                            {{item.massage}}
                         </p>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button id="btn1" (click)="openViewDialog(item.name,item.username,item.para)">details</button>
+                        <button mat-button id="btn1" (click)="openViewDialog(item.id,item.title,item.tags,item.massage,item.color)">details</button>
                     </mat-card-actions>
                 </mat-card>
             </div>
         }
+        
     </div>

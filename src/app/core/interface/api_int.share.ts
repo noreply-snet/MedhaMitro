@@ -44,20 +44,20 @@ export interface BankDataCreate {
 export interface NoteData {
   id: number;
   title: string;
-  tags: [string]; //string;
-  para: string;
+  tags: string[]; //an array of strings;
+  massage: string;
   color: string;
 }
 
 export interface NoteDataCreate {
   title: string;
-  tags: [string]; //string;
-  para: string;
+  tags: string[]; //an array of strings;
+  massage: string;
   color: string;
 }
 
 
-export interface PassDataReUp {
+export interface PassData {
   id: number;
   acc_name: string;
   url: string;
