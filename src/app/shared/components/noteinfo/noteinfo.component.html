@@ -1,6 +1,6 @@
 
     <div class="main">
-        @for (item of dataChild()|note:filter; track item) {
+        @for (item of dataChild()|note:filter; track item.id) {
 
             <div class="cardsx">
                 <mat-card [style]="applyColor(item.color)" class="example-card">

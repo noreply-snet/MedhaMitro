@@ -37,7 +37,8 @@
         <button
           mat-raised-button
           color="accent"
-          [ngClass]="{ copied: clickedIcons[0] }"
+          (click)="clickedIcons[4]=!clickedIcons[4]"
+          [ngClass]="{ copied: clickedIcons[4] }"
           [cdkCopyToClipboard]="
             'Account Name: ' +
             data.acc_name +
@@ -78,6 +79,7 @@
                 fontIcon="content_copy"
               ></mat-icon>
             </td>
+            <td></td>
             <td class="cd cd1">
               <span>{{ data.acc_name }}</span>
             </td>
@@ -95,6 +97,7 @@
                 fontIcon="content_copy"
               ></mat-icon>
             </td>
+            <td></td>
             <td class="cd cd2">
               <span>{{ data.url }}</span>
             </td>
@@ -112,6 +115,7 @@
                 fontIcon="content_copy"
               ></mat-icon>
             </td>
+            <td></td>
             <td class="cd cd3">
               <span>{{ data.loginid }}</span>
             </td>
@@ -159,6 +163,7 @@
                 fontIcon="content_copy"
               ></mat-icon>
             </td>
+            <td></td>
             <td class="cd cd5">
               <span>{{ data.ass_email }}</span>
             </td>
@@ -176,6 +181,7 @@
                 fontIcon="content_copy"
               ></mat-icon>
             </td>
+            <td></td>
             <td class="cd cd6">
               <span>{{ data.notes }}</span>
             </td>

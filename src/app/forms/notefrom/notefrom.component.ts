@@ -79,7 +79,9 @@ export class NotefromComponent {
 
   ngOnInit(): void {
     if (this.data.type === 'View') {
-      console.log(this.data);
+      
+      // console.log(this.data);
+
       this.title = 'View Note';
       this.form.setValue({
         id: this.data.id,

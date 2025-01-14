@@ -66,7 +66,6 @@ tr > td {
     color: rgb(207, 177, 43);
 }
 
-.copied {
-    background-color: #9267df;
-    color: white;
+.copied{
+    background-color: #f2ff80;
 }

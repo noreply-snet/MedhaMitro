@@ -43,59 +43,33 @@ mat-form-field{
     margin-right: 1.5rem;
 }
 
-.cont {
-    display: flex;
-
+tr{
+    padding: 10px 0;
 }
 
-.cont-data {
-    display: flex;
+tr>td{
+    padding: 10px;
+    border: solid 1px #673ab7;
+    border-radius: 5px;
 }
 
 .cf>h3 {
-    margin-right: 1.5rem;
     font-size: 1.2rem;
-    margin-bottom: 1.1rem;
 }
 
 .icon {
     cursor: pointer;
 }
 
-.icon>mat-icon {
-    margin-bottom: 1.1rem;
-}
-
-.ic4>mat-icon{
-    margin-bottom: 0px;
-}
-.ic5{
-    display: flex;
-    align-items: baseline;
-}
-
-
-.cd {
-    margin-bottom: 1.4rem;
-}
-
-.cd>mat-icon {
-    margin-right: 1.2rem;
-    cursor: pointer;
-}
-
 .cd>span {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
-
-
-
 
 .clicked {
     color: rgb(207, 177, 43);
 }
 
-.copied {
-    background-color: #673ab7;
+.copied{
+    background-color: #f2ff80;
 }

@@ -62,3 +62,7 @@ mat-error {
 tr > td{
     padding: 10px ;
 }
+
+.copied{
+    background-color: #f2ff80;
+}
