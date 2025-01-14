@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PassData, PassDataCreate } from '../../../core/interface/api_int.share';
+import {
+  PassData,
+  PassDataCreate,
+} from '../../../core/interface/api_int.share';
 import { PassSharedService } from '../shared/pass-shared.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PassApiService {
-
   private apiUrl = 'http://127.0.0.1:8000/pass'; // Replace with your backend endpoint
 
   constructor(private http: HttpClient, private passDS: PassSharedService) {}

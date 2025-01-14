@@ -12,7 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { CommonImportsModule } from '../../core/modules/common-imports.module';
 import { PassMaskPipe } from '../../shared/pipes/masking.pipe';
-import { AtmDataCreate, AtmDataReUp } from '../../core/interface/api_int.share';
+import { AtmDataCreate, AtmData } from '../../core/interface/api_int.share';
 import { AtmService } from '../../shared/services/apis/atm.service';
 
 @Component({
@@ -115,14 +115,14 @@ export class AtmfromComponent implements OnInit {
 
   onUpdate() {
     if (this.form.valid) {
-      const updatedAtm: AtmDataReUp = this.atmUpdateSerialize(this.form.value);
+      const updatedAtm: AtmData = this.atmUpdateSerialize(this.form.value);
       this.atmService.atmUpdate(updatedAtm);
     } else {
       console.error('Form is invalid');
     }
   }
 
-  atmUpdateSerialize(value: any): AtmDataReUp {
+  atmUpdateSerialize(value: any): AtmData {
     return {
       id: value.id, // Ensure the ID is passed correctly
       card_number: String(value.card_number), // Ensure it's a string

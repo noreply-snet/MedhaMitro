@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { AtmDataReUp } from '../../../core/interface/api_int.share';
+import { AtmData } from '../../../core/interface/api_int.share';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +10,19 @@ export class AtmSharedService {
 
   constructor() { }
 
-  private atmsDataSubject = new BehaviorSubject<AtmDataReUp[]>([]); // Initial list
+  private atmsDataSubject = new BehaviorSubject<AtmData[]>([]); // Initial list
   atmsData$ = this.atmsDataSubject.asObservable(); // Observable to subscribe to
 
-  setAtmsData(data: AtmDataReUp[]): void {
+  setAtmsData(data: AtmData[]): void {
     this.atmsDataSubject.next(data); // Assign the new data to the list
   }
 
-  addAtm(newAtm: AtmDataReUp): void {
+  addAtm(newAtm: AtmData): void {
     const currentData = this.atmsDataSubject.value;
     this.atmsDataSubject.next([...currentData, newAtm]); // Add new ATM and update the list
   }
 
-  updateAtm(updatedAtm: AtmDataReUp): void {
+  updateAtm(updatedAtm: AtmData): void {
     const currentData = this.atmsDataSubject.value;
     const updatedData = currentData.map((atm) =>
       atm.id === updatedAtm.id ? updatedAtm : atm // Update the ATM by ID

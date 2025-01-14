@@ -6,7 +6,7 @@ export interface AtmDataCreate {
   cvv: number;
 }
 
-export interface AtmDataReUp {
+export interface AtmData {
   id: number;
   card_number: string;
   name: string;
