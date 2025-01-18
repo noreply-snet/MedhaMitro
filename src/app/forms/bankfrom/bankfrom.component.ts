@@ -16,10 +16,12 @@ import { CardNoMaskPipe, PassMaskPipe } from '../../shared/pipes/masking.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { BankData, BankDataCreate } from '../../core/interface/api_int.share';
-import { BankApiService } from '../../shared/services/apis/bank-api.service';
+import { CentralApisService } from '../../shared/services/apis/central-apis.service';
+import { ApiType } from '../../core/enums/api-type.enum';
 
 @Component({
   selector: 'app-bankfrom',
+  standalone: true,
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -34,8 +36,9 @@ import { BankApiService } from '../../shared/services/apis/bank-api.service';
     MatButtonModule,
     MatInputModule,
   ],
+  providers: [CentralApisService],
   templateUrl: './bankfrom.component.html',
-  styleUrl: './bankfrom.component.css',
+  styleUrls: ['./bankfrom.component.css'],
 })
 export class BankfromComponent {
   title: string = 'Add Bank Details';
@@ -61,7 +64,7 @@ export class BankfromComponent {
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
-    private bankApi: BankApiService
+    private apiService: CentralApisService
   ) {
     this.form = this.fb.group({
       id: '',
@@ -76,6 +79,7 @@ export class BankfromComponent {
       note: [''],
     });
   }
+
   ngOnInit(): void {
     if (this.dialogData.type === 'View') {
       this.title = 'View Bank Details';
@@ -101,7 +105,7 @@ export class BankfromComponent {
   onSubmit() {
     if (this.form.valid) {
       const newBank: BankDataCreate = this.bankSerialize(this.form.value);
-      this.bankApi.bankCreate(newBank);
+      this.apiService.createData<BankDataCreate>(ApiType.Bank, newBank);
     } else {
       console.error('Form is invalid');
     }
@@ -123,10 +127,8 @@ export class BankfromComponent {
 
   onUpdate() {
     if (this.form.valid) {
-      const updatedBank: BankData = this.bankUpdateSerialize(
-        this.form.value
-      );
-      this.bankApi.bankUpdate(updatedBank);
+      const updatedBank: BankData = this.bankUpdateSerialize(this.form.value);
+      this.apiService.updateData<BankData>(ApiType.Bank, updatedBank);
     } else {
       console.error('Form is invalid');
     }
@@ -149,10 +151,9 @@ export class BankfromComponent {
 
   onDelete(id: number): void {
     if (id) {
-      this.bankApi.bankDelete(id);
+      this.apiService.deleteData(ApiType.Bank, id);
     } else {
       console.error('Invalid ID');
     }
   }
-  
 }

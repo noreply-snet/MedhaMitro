@@ -13,10 +13,12 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonImportsModule } from '../../core/modules/common-imports.module';
 import { PassMaskPipe } from '../../shared/pipes/masking.pipe';
 import { AtmDataCreate, AtmData } from '../../core/interface/api_int.share';
-import { AtmService } from '../../shared/services/apis/atm.service';
+import { CentralApisService } from '../../shared/services/apis/central-apis.service';
+import { ApiType } from '../../core/enums/api-type.enum';
 
 @Component({
   selector: 'app-atmfrom',
+  standalone: true,
   imports: [
     CommonImportsModule,
     MatDialogModule,
@@ -26,7 +28,7 @@ import { AtmService } from '../../shared/services/apis/atm.service';
     ReactiveFormsModule,
     MatInputModule,
   ],
-  providers: [AtmService],
+  providers: [CentralApisService],
   templateUrl: './atmfrom.component.html',
   styleUrls: ['./atmfrom.component.css'],
 })
@@ -58,7 +60,7 @@ export class AtmfromComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
-    private atmService: AtmService
+    private apiService: CentralApisService
   ) {
     this.form = this.fb.group({
       id: '',
@@ -98,7 +100,7 @@ export class AtmfromComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       const newAtm: AtmDataCreate = this.atmSerialize(this.form.value);
-      this.atmService.atmCreate(newAtm);
+      this.apiService.createData<AtmDataCreate>(ApiType.Atm, newAtm);
     } else {
       console.error('Form is invalid');
     }
@@ -116,7 +118,7 @@ export class AtmfromComponent implements OnInit {
   onUpdate() {
     if (this.form.valid) {
       const updatedAtm: AtmData = this.atmUpdateSerialize(this.form.value);
-      this.atmService.atmUpdate(updatedAtm);
+      this.apiService.updateData<AtmData>(ApiType.Atm, updatedAtm);
     } else {
       console.error('Form is invalid');
     }
@@ -134,7 +136,7 @@ export class AtmfromComponent implements OnInit {
 
   onDelete(id: number): void {
     if (id) {
-      this.atmService.atmDelete(id);
+      this.apiService.deleteData(ApiType.Atm, id);
     } else {
       console.error('Invalid ID');
     }

@@ -1,33 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { PassinfoComponent } from '../../shared/components/passinfo/passinfo.component';
-import { PassApiService } from '../../shared/services/apis/pass-api.service';
 import { PassData } from '../../core/interface/api_int.share';
-import { PassSharedService } from '../../shared/services/shared/pass-shared.service';
+import { CentralApisService } from '../../shared/services/apis/central-apis.service';
+import { CasheService } from '../../shared/services/shared/cashe.service';
+import { ApiType } from '../../core/enums/api-type.enum';
 
 @Component({
   selector: 'app-passwords',
-  imports: [
-  PassinfoComponent,
-  ],
+  imports: [PassinfoComponent],
   templateUrl: './passwords.component.html',
-  styleUrl: './passwords.component.css'
+  styleUrl: './passwords.component.css',
 })
 export class PasswordsComponent implements OnInit {
-  
   data: PassData[] = [];
 
-  constructor(private passApi: PassApiService, private passShare: PassSharedService) { }
-  
+  constructor(
+    private Api: CentralApisService,
+    private casheService: CasheService
+  ) {}
+
   ngOnInit(): void {
-    // console.log(passDataSet);
-    this.passShare.passesData$.subscribe((data) => {
-      this.data = data;
+    // Subscribe to the cache observable
+    this.casheService.cacheState$.subscribe((cache) => {
+      const cachedPassData = cache.get(ApiType.Pass);
+      if (cachedPassData) {
+        this.data = cachedPassData;
+      }
     });
 
-    this.passApi.fetchAllPasses();
-
+    // Fetch data from API if not already cached
+    if (!this.casheService.get(ApiType.Pass)) {
+      this.Api.fetchAll(ApiType.Pass);
+    }
   }
-  
-
-
 }

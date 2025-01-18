@@ -17,10 +17,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { NoteData, NoteDataCreate } from '../../core/interface/api_int.share';
-import { NoteApiService } from '../../shared/services/apis/note-api.service';
+import { CentralApisService } from '../../shared/services/apis/central-apis.service';
+import { ApiType } from '../../core/enums/api-type.enum';
 
 @Component({
   selector: 'app-notefrom',
+  standalone: true,
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -35,7 +37,7 @@ import { NoteApiService } from '../../shared/services/apis/note-api.service';
     MatSelectModule,
   ],
   templateUrl: './notefrom.component.html',
-  styleUrl: './notefrom.component.css',
+  styleUrls: ['./notefrom.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotefromComponent {
@@ -58,7 +60,7 @@ export class NotefromComponent {
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private noteApi: NoteApiService
+    private apiService: CentralApisService
   ) {
     this.form = this.fb.group({
       id: '',
@@ -99,7 +101,7 @@ export class NotefromComponent {
     if (this.form.valid) {
       // Form is valid, handle the submission
       const newNote = this.noteSerialize(this.form.value);
-      this.noteApi.noteCreate(newNote);
+      this.apiService.createData<NoteDataCreate>(ApiType.Note, newNote);
       console.log('Form Created:', this.form.value);
     } else {
       // Form is invalid, display error messages or take appropriate action
@@ -121,7 +123,7 @@ export class NotefromComponent {
     if (this.form.valid) {
       // Form is valid, handle the submission
       const updatedNote = this.noteUpdateSerialize(this.form.value);
-      this.noteApi.noteUpdate(updatedNote);
+      this.apiService.updateData<NoteData>(ApiType.Note, updatedNote);
       console.log('Form Updated:', this.form.value);
     } else {
       // Form is invalid, display error messages or take appropriate action
@@ -142,7 +144,7 @@ export class NotefromComponent {
 
   onDelete(id: number): void {
     if (id) {
-      this.noteApi.noteDelete(id);
+      this.apiService.deleteData(ApiType.Note, id);
     } else {
       console.error('Invalid ID');
     }

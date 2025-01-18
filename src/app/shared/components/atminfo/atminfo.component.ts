@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import { CardPipe } from '../../pipes/card.pipe';
 import { CardNoMaskPipe, MaskingPipe } from '../../pipes/masking.pipe';
-import { AtmDataReUp } from '../../../core/interface/api_int.share';
+import { AtmData } from '../../../core/interface/api_int.share';
 
 @Component({
   selector: 'app-atminfo',
@@ -32,7 +32,7 @@ import { AtmDataReUp } from '../../../core/interface/api_int.share';
   styleUrl: './atminfo.component.css',
 })
 export class AtminfoComponent implements OnInit, OnDestroy {
-  getDATA = input<AtmDataReUp[]>([
+  getDATA = input<AtmData[]>([
     { id: 0, card_number: 'N/A', name: 'N/A', exp_date: '04/04', cvv: 404 },
   ]);
 

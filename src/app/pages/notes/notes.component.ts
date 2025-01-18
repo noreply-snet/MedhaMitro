@@ -6,12 +6,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NoteData } from '../../core/interface/api_int.share';
-import { NoteApiService } from '../../shared/services/apis/note-api.service';
-import { NoteSharedService } from '../../shared/services/shared/note-shared.service';
+import { CentralApisService } from '../../shared/services/apis/central-apis.service';
+import { CasheService } from '../../shared/services/shared/cashe.service';
+import { ApiType } from '../../core/enums/api-type.enum';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-notes',
+  standalone: true,
   imports: [
     NoteinfoComponent, 
     MatIconModule,
@@ -19,23 +21,31 @@ import { Subscription } from 'rxjs';
     MatTooltipModule
   ],
   templateUrl: './notes.component.html',
-  styleUrl: './notes.component.css',
+  styleUrls: ['./notes.component.css'],
 })
 export class NotesComponent implements OnInit, OnDestroy {
   data: NoteData[] = [];
-
   v1: Subscription = new Subscription();
 
-
-  constructor(private dialog: MatDialog, private noteApi: NoteApiService, private noteShare: NoteSharedService) {}
+  constructor(
+    private dialog: MatDialog,
+    private Api: CentralApisService,
+    private casheService: CasheService
+  ) {}
 
   ngOnInit(): void {
-    this.v1 = this.noteShare.notesData$.subscribe((data) => {
-      this.data = data;
+    // Subscribe to the cache observable
+    this.casheService.cacheState$.subscribe((cache) => {
+      const cachedNoteData = cache.get(ApiType.Note);
+      if (cachedNoteData) {
+        this.data = cachedNoteData;
+      }
     });
 
-    this.noteApi.fetchAllNotes();
-    
+    // Fetch data from API if not already cached
+    if (!this.casheService.get(ApiType.Note)) {
+      this.Api.fetchAll(ApiType.Note);
+    }
   }
 
   ngOnDestroy(): void {

@@ -17,11 +17,13 @@ import { CommonModule } from '@angular/common';
 import { PassMaskPipe } from '../../shared/pipes/masking.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { PassApiService } from '../../shared/services/apis/pass-api.service';
+import { CentralApisService } from '../../shared/services/apis/central-apis.service';
+import { ApiType } from '../../core/enums/api-type.enum';
 import { PassData, PassDataCreate } from '../../core/interface/api_int.share';
 
 @Component({
   selector: 'app-passfrom',
+  standalone: true,
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -34,8 +36,9 @@ import { PassData, PassDataCreate } from '../../core/interface/api_int.share';
     MatButtonModule,
     MatInputModule,
   ],
+  providers: [CentralApisService],
   templateUrl: './passfrom.component.html',
-  styleUrl: './passfrom.component.css',
+  styleUrls: ['./passfrom.component.css'],
 })
 export class PassfromComponent {
   title: string = 'Add Password';
@@ -59,7 +62,7 @@ export class PassfromComponent {
   constructor(
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private passApi: PassApiService
+    private apiService: CentralApisService
   ) {
     this.form = this.fb.group({
       id: '',
@@ -91,7 +94,6 @@ export class PassfromComponent {
         notes: this.data.notes,
       });
     }
-    // console.log(this.data);
   }
 
   getUrlPatterns(): RegExp[] {
@@ -99,7 +101,6 @@ export class PassfromComponent {
       /^(?:https?:\/\/)?(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?::[0-9]+)?(?:[/\w .-]*)*\/?$/, // pattern for "https://material.angular.io/components/form-field/examples"
       /^(?:https?:\/\/)?localhost(?::[0-9]+)?(?:[/\w .-]*)*\/?$/, // pattern for "http://localhost:4200/home/passwords"
       /^(?:https?:\/\/)?(?:[0-9]{1,3}\.){3}[0-9]{1,3}(?::[0-9]+)?(?:[/\w .-]*)*\/?$/, // pattern for "http://192.168.0.1/index.html"
-      // Add more patterns for different URL variations
     ];
   }
 
@@ -134,12 +135,10 @@ export class PassfromComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      // Form is valid, handle the submission
       const newPass = this.passSerialize(this.form.value);
-      this.passApi.passCreate(newPass);
+      this.apiService.createData<PassDataCreate>(ApiType.Pass, newPass);
       console.log('Form Created:', this.form.value);
     } else {
-      // Form is invalid, display error messages or take appropriate action
       console.log('Form is invalid');
     }
   }
@@ -157,12 +156,10 @@ export class PassfromComponent {
 
   onUpdate() {
     if (this.form.valid) {
-      // Form is valid, handle the submission
       const updatedPass = this.passUpdateSerialize(this.form.value);
-      this.passApi.passUpdate(updatedPass);
+      this.apiService.updateData<PassData>(ApiType.Pass, updatedPass);
       console.log('Form Updated:', this.form.value);
     } else {
-      // Form is invalid, display error messages or take appropriate action
       console.log('Form is invalid');
     }
   }
@@ -178,9 +175,10 @@ export class PassfromComponent {
       notes: value.notes,
     };
   }
+
   onDelete(id: number): void {
     if (id) {
-      this.passApi.passDelete(id);
+      this.apiService.deleteData(ApiType.Pass, id);
     } else {
       console.error('Invalid ID');
     }
