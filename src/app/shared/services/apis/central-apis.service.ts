@@ -12,11 +12,18 @@ export class CentralApisService {
 
   constructor(private http: HttpClient, private cacheService: CasheService) { }
 
+  // Base URL
+  url : string = 'http://127.0.0.1:8000';
+
+  // For Deployment and Testing porposes 
+  newURL : string = 'https://passbackend-api.onrender.com';
+  
+
   private baseUrls = {
-    [ApiType.Bank]: 'http://127.0.0.1:8000/bank',
-    [ApiType.Atm]: 'http://127.0.0.1:8000/atm',
-    [ApiType.Note]: 'http://127.0.0.1:8000/note',
-    [ApiType.Pass]: 'http://127.0.0.1:8000/pass',
+    [ApiType.Bank]: '${this.url}/bank',
+    [ApiType.Atm]: '${this.url}/atm',
+    [ApiType.Note]: '${this.url}/note',
+    [ApiType.Pass]: '${this.url}/pass',
   };
 
   // API Requests
