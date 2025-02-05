@@ -23,10 +23,10 @@ export class CentralApisService {
   
 
   private baseUrls = {
-    [ApiType.Bank]: '${this.url}/bank',
-    [ApiType.Atm]: '${this.url}/atm',
-    [ApiType.Note]: '${this.url}/note',
-    [ApiType.Pass]: '${this.url}/pass',
+    [ApiType.Bank]: `${this.url}/bank`,
+    [ApiType.Atm]: `${this.url}/atm`,
+    [ApiType.Note]: `${this.url}/note`,
+    [ApiType.Pass]: `${this.url}/pass`,
   };
 
   // API Requests
