@@ -16,7 +16,7 @@ export class CentralApisService {
   url : string = 'http://127.0.0.1:8000';
 
   // For Deployment and Testing porposes 
-  newURL : string = 'https://passbackend-api.onrender.com';
+  url : string = 'https://passbackend-api.onrender.com';
   
 
   private baseUrls = {
