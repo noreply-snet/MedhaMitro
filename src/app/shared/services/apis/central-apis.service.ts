@@ -10,10 +10,13 @@ import { CasheService } from '../shared/cashe.service';
 })
 export class CentralApisService {
 
-  constructor(private http: HttpClient, private cacheService: CasheService) { }
+  constructor(private http: HttpClient, private cacheService: CasheService) { 
 
+
+  }
+
+  // url : string = 'http://127.0.0.1:8000';
   // Base URL
-  url : string = 'http://127.0.0.1:8000';
 
   // For Deployment and Testing porposes 
   url : string = 'https://passbackend-api.onrender.com';
