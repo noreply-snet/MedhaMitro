@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiType } from '../../../core/enums/api-type.enum';
 import { CasheService } from '../shared/cashe.service';
+import { environment } from '../../../../environments/environment';
+
 
 
 @Injectable({
@@ -10,17 +12,15 @@ import { CasheService } from '../shared/cashe.service';
 })
 export class CentralApisService {
 
+   url : string = environment.BaseURL;
+
   constructor(private http: HttpClient, private cacheService: CasheService) { 
 
+  // Base URL
+   this.url = environment.BaseURL;
 
   }
 
-  // url : string = 'http://127.0.0.1:8000';
-  // Base URL
-
-  // For Deployment and Testing porposes 
-  url : string = 'https://passbackend-api.onrender.com';
-  
 
   private baseUrls = {
     [ApiType.Bank]: `${this.url}/bank`,
